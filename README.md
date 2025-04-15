@@ -24,7 +24,7 @@
     <h2>📑 Table of Contents</h2>
     <ul>
       <li><a href="#overview">Overview</a></li>
-      <li><a href="#table 1">Overview</a></li>
+      <li><a href="#table 1">Table 1</a></li>
     </ul>
   </nav>
 
