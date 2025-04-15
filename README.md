@@ -13,50 +13,6 @@
       color: #333;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    h2 {
-      margin-top: 2rem;
-    }
-
-    nav {
-      background: #eee;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 2rem;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    nav ul li {
-      margin: 0.5rem 0;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: #007acc;
-    }
-
-    nav ul li a:hover {
-      text-decoration: underline;
-    }
-
-    section {
-      padding-top: 1rem;
-      border-top: 1px solid #ccc;
-    }
-
-    footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
   </style>
 </head>
 <body>
