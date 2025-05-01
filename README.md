@@ -2,63 +2,47 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Welcome to My Project</title>
+  <title>College Scorecard Preview</title>
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
-      margin: 0;
+      font-family: Arial, sans-serif;
       padding: 2rem;
-      background-color: #f9f9f9;
-      color: #333;
     }
-
+    h1 {
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
 
-  <h1>🚀 Welcome to My Project</h1>
-  <p>A modern open-source tool for doing awesome things with ease.</p>
-
-  <nav>
-    <h2>📑 Table of Contents</h2>
-    <ul>
-      <li><a href="#overview">Overview</a></li>
-      <li><a href="#table 1">Table 1</a></li>
-    </ul>
-  </nav>
-
-  <section id="overview">
-    <h2>🔍 Overview</h2>
-    <p>This project helps you do XYZ using modern web tools. It's lightweight, flexible, and easy to set up.</p>
-  </section>
-
-<section id="Table 1">
-    <h2>🔍 Table</h2>
-    <p> <!-- Grid.js JS -->
-  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <h1>📊 College Scorecard Data Snapshot</h1>
+  <div id="table"></div>
 
   <script>
-    new gridjs.Grid({
-      columns: ["Name", "Project", "Status"],
-      data: [
-        ["Alice", "Genome Analysis", "✅ Complete"],
-        ["Bob", "ML Model", "🚧 In Progress"],
-        ["Charlie", "Data Cleaning", "❌ Not Started"]
-      ],
-      search: true,
-      sort: true,
-      pagination: {
-        limit: 5
-      }
-    }).render(document.getElementById("wrapper"));
-  </script></p>
-  </section>
+    Papa.parse("pep_roi.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const headers = results.meta.fields;
+        const rows = results.data.map(row => headers.map(h => row[h]));
 
-  <footer>
-    Made by Larissa Lauer, Michelle Chen, and Sebastian Kane
-  </footer>
+        new gridjs.Grid({
+          columns: headers,
+          data: rows,
+          search: true,
+          pagination: { limit: 10 },
+          sort: true,
+          fixedHeader: true,
+          height: '500px'
+        }).render(document.getElementById("table"));
+      }
+    });
+  </script>
 
 </body>
 </html>
+
 
