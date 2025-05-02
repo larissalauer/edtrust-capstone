@@ -28,35 +28,17 @@
     .sidebar.hidden {
       transform: translateX(-100%);
     }
-    .sidebar h2 {
-      font-size: 1.2rem;
-      margin-top: 0;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-    .sidebar li {
-      margin: 0.5rem 0;
-    }
-    .sidebar a {
-      text-decoration: none;
-      color: #007BFF;
-    }
-    .sidebar a:hover {
-      text-decoration: underline;
-    }
     /* Main content */
     .content {
       margin-left: 250px;
       padding: 2rem;
-      width: 100%;
+      width: 80%;
       transition: margin-left 0.3s ease;
     }
     .content.full {
-      margin-left: 0;
+      margin-left: 0.5;
     }
-    /* Toggle button */
+    /* Toggle button 
     .toggle-btn {
       position: fixed;
       top: 1rem;
@@ -67,25 +49,23 @@
       padding: 0.5rem 1rem;
       cursor: pointer;
       z-index: 1000;
-    }
-    h1 {
-      margin-bottom: 1rem;
+      */
     }
   </style>
 </head>
 <body>
 
-<button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+  <button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
 
   <div class="sidebar" id="sidebar">
-    <h2>📑 Table of Contents</h2>
+    <h2>Table of Contents</h2>
     <ul>
       <li><a href="#scorecard">College Scorecard Data Snapshot</a></li>
     </ul>
   </div>
-  
-<div class="content" id="content">
-    <h1 id="scorecard">📊 College Scorecard Data Snapshot</h1>
+
+  <div class="content" id="content">
+    <h1 id="scorecard">College Scorecard Data Snapshot</h1>
     <div id="table"></div>
   </div>
 
@@ -97,7 +77,6 @@
       content.classList.toggle("full");
     }
 
-  <script>
     Papa.parse("pep_roi.csv", {
       download: true,
       header: true,
@@ -120,5 +99,3 @@
 
 </body>
 </html>
-
-
