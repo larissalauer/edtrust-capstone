@@ -108,8 +108,26 @@
         const headers = results.meta.fields;
         const rows = results.data.map(row => headers.map(h => row[h]));
 
+        // Define columns — apply formatter to "Meets Threshold?"
+        const columns = headers.map(h => {
+          if (h === "Meets Threshold 0?") {
+            return {
+              name: h,
+              formatter: (cell) => {
+                const value = String(cell).trim().toLowerCase();
+                const isTrue = (value === "true");
+                const color = isTrue ? "green" : "red";
+                const displayText = isTrue ? "True" : "False";
+                return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
+              }
+            };
+          } else {
+            return h;
+          }
+        });
+
         new gridjs.Grid({
-          columns: headers,
+          columns: columns,
           data: rows,
           search: true,
           pagination: { limit: 10 },
