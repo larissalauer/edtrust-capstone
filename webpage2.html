@@ -71,6 +71,77 @@
 
     <h1 id="threshold1">Threshold 1</h1>
     <div id="table-threshold1"></div>
+    <section id="threshold1-framework">
+      <h2>Threshold 1: Framework</h2>
+      <p>
+        <strong>IHEP Earnings Premium:</strong>  
+        “A student meets this threshold if they reach at least median earnings in their field of
+        study (or, if field of study data is unavailable, the median earnings for the institution’s
+        predominant degree type).” (p. 40)
+      </p>
+      <h3>Current Calculations</h3>
+      <ul>
+        <li>
+          <strong>Earnings Premium:</strong><br/>
+          Median post‑enrollment earnings at institution (10 years after entry)
+        </li>
+        <li>
+          <strong>Meeting Threshold 1 (binary):</strong><br/>
+          Earnings premium ≥ in‑state median earnings for people with bachelor’s degree
+        </li>
+      </ul>
+      <h3>Extensions</h3>
+      <p>
+        Going forward, you might consider incorporating field‑of‑study data (despite its
+        high missingness — 77.5 %) or differentiating by degree type (e.g., bachelor’s vs.
+        associate’s) to refine the threshold calculation.
+      </p>
+    </section>
+  
+    <section id="threshold1-regression">
+      <h2>Threshold 1: Regression Models</h2>
+      <p>
+        Next, we estimate how controlling for the share of Pell Grant recipients shifts the relative
+        earnings premium across different Minority‑Serving Institution (MSI) types.
+      </p>
+      <img
+        src="Regression Plot_ Earnings Premium MSI.png"
+        alt="Regression plot of earnings premium by MSI type"
+        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
+      />
+      <ul>
+        <li>
+          <strong>HBCUs:</strong> Move from underperforming to outperforming non‑MSI schools
+          (≈ +$7,000) once Pell % is included.
+        </li>
+        <li><strong>PBI:</strong> Also see a noticeable improvement.</li>
+        <li><strong>HSI &amp; TCU:</strong> Remain largely unchanged.</li>
+        <li><strong>ANNHI, NANTI, AANAPII:</strong> Experience a modest decrease (≈ $2,000).</li>
+      </ul>
+      <p>
+        Overall, the impact of Pell % is heterogeneous. Because MSI classification is based on
+        whether each subgroup exceeds a fixed threshold (typically ≥ 25 %), using continuous
+        demographic percentages could yield more nuanced insights than a simple binary flag.
+      </p>
+    </section>
+  
+    <section id="threshold1-demographics">
+      <h2>Threshold 1: Regression Model with Demographics</h2>
+      <p>
+        We replace the MSI flags with continuous demographic shares—% Asian, % Black,
+        % Hispanic, etc.—to see how each group’s concentration relates to earnings once Pell %
+        is controlled.
+      </p>
+      <img
+        src="Regression Plot_ Earnings Premium Demographic.png"
+        alt="Regression plot of earnings premium with demographic features"
+        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
+      />
+      <p>
+        Aside from Asian students, controlling for Pell % amplifies the positive association 
+        between each demographic share and earnings relative to the White student baseline.
+      </p>
+    </section>
   </div>
 
   <script>
