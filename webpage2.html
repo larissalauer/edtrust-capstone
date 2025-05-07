@@ -140,28 +140,28 @@
 
     // Load threshold1.csv
     Papa.parse("threshold1.csv", {
-      download: true,
-      header: true,
-      complete: function(results) {
-        const headers = results.meta.fields;
-        const rows = results.data.map(row => headers.map(h => row[h]));
+    download: true,
+    header: true,
+    complete: function(results) {
+      const headers = results.meta.fields;
+      const rows = results.data.map(row => headers.map(h => row[h]));
 
-        const columns = headers.map(h => {
-          if (h === "Meets Threshold 1") {
-            return {
-              name: h,
-              formatter: (cell) => {
-                const value = String(cell).trim().toLowerCase();
-                const isTrue = (value === "true");
-                const color = isTrue ? "green" : "red";
-                const displayText = isTrue ? "True" : "False";
-                return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
-              }
-            };
-          } else {
-            return h;
-          }
-        });
+      const columns = headers.map(h => {
+        if (h === "Meets Threshold 1") { 
+          return {
+            name: h,
+            formatter: (cell) => {
+              const value = String(cell).trim().toLowerCase();
+              const isTrue = (value === "true");
+              const color = isTrue ? "green" : "red";
+              const displayText = isTrue ? "True" : "False";
+              return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
+            }
+          };
+        } else {
+          return h;
+        }
+      });
 
         new gridjs.Grid({
           columns: columns,
