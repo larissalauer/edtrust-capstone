@@ -1,0 +1,180 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>College Scorecard Preview</title>
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #f4f4f4;
+      padding: 1rem;
+      border-right: 1px solid #ccc;
+      height: 100vh;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+    }
+    .sidebar.hidden {
+      transform: translateX(-100%);
+    }
+    .content {
+      margin-left: 250px;
+      padding: 2rem;
+      width: 80%;
+      transition: margin-left 0.3s ease;
+    }
+    .content.full {
+      margin-left: 0.5rem;
+    }
+    .toggle-btn {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
+
+  <div class="sidebar" id="sidebar">
+    <h2>Table of Contents</h2>
+    <ul>
+      <li><a href="#scorecard">College Scorecard Data Snapshot</a></li>
+      <li><a href="#threshold0">Threshold 0</a></li>
+      <li><a href="#threshold1">Threshold 1</a></li>
+    </ul>
+  </div>
+
+  <div class="content" id="content">
+    <h1 id="scorecard">College Scorecard Data Snapshot</h1>
+    <div id="table"></div>
+
+    <h1 id="threshold0">Threshold 0</h1>
+    <div id="table-threshold0"></div>
+
+    <h1 id="threshold1">Threshold 1</h1>
+    <div id="table-threshold1"></div>
+  </div>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      const content = document.getElementById("content");
+      sidebar.classList.toggle("hidden");
+      content.classList.toggle("full");
+    }
+
+    // Load main CSV: pep_roi.csv
+    Papa.parse("pep_roi.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const headers = results.meta.fields;
+        const rows = results.data.map(row => headers.map(h => row[h]));
+
+        new gridjs.Grid({
+          columns: headers,
+          data: rows,
+          search: true,
+          pagination: { limit: 10 },
+          sort: true,
+          fixedHeader: true,
+          height: '500px'
+        }).render(document.getElementById("table"));
+      }
+    });
+
+    // Load threshold0.csv
+    Papa.parse("threshold0.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const headers = results.meta.fields;
+        const rows = results.data.map(row => headers.map(h => row[h]));
+
+        const columns = headers.map(h => {
+          if (h === "Meets Threshold 0?") {
+            return {
+              name: h,
+              formatter: (cell) => {
+                const value = String(cell).trim().toLowerCase();
+                const isTrue = (value === "true");
+                const color = isTrue ? "green" : "red";
+                const displayText = isTrue ? "True" : "False";
+                return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
+              }
+            };
+          } else {
+            return h;
+          }
+        });
+
+        new gridjs.Grid({
+          columns: columns,
+          data: rows,
+          search: true,
+          pagination: { limit: 10 },
+          sort: true,
+          fixedHeader: true,
+          height: '500px'
+        }).render(document.getElementById("table-threshold0"));
+      }
+    });
+
+    // Load threshold1.csv
+    Papa.parse("threshold1.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const headers = results.meta.fields;
+        const rows = results.data.map(row => headers.map(h => row[h]));
+
+        const columns = headers.map(h => {
+          if (h === "Meets Threshold 1") {
+            return {
+              name: h,
+              formatter: (cell) => {
+                const value = String(cell).trim().toLowerCase();
+                const isTrue = (value === "true");
+                const color = isTrue ? "green" : "red";
+                const displayText = isTrue ? "True" : "False";
+                return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
+              }
+            };
+          } else {
+            return h;
+          }
+        });
+
+        new gridjs.Grid({
+          columns: columns,
+          data: rows,
+          search: true,
+          pagination: { limit: 10 },
+          sort: true,
+          fixedHeader: true,
+          height: '500px'
+        }).render(document.getElementById("table-threshold1"));
+      }
+    });
+  </script>
+
+</body>
+</html>
