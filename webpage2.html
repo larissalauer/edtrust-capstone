@@ -1,83 +1,107 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>College Scorecard Preview</title>
+  <title>Stanford/EdTrust Capstone</title>
   <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
   <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
       margin: 0;
       display: flex;
     }
-    .sidebar {
-      width: 250px;
-      background-color: #f4f4f4;
-      padding: 1rem;
-      border-right: 1px solid #ccc;
-      height: 100vh;
-      box-sizing: border-box;
-      position: fixed;
-      left: 0;
-      top: 0;
-      overflow-y: auto;
-      transition: transform 0.3s ease;
-    }
-    .sidebar.hidden {
-      transform: translateX(-100%);
-    }
     .content {
-      margin-left: 250px;
+      margin-left: 100px;
       padding: 2rem;
       width: 80%;
       transition: margin-left 0.3s ease;
     }
     .content.full {
-      margin-left: 0.5rem;
-    }
-    .toggle-btn {
-      position: fixed;
-      top: 1rem;
-      left: 1rem;
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      z-index: 1000;
+      margin-left: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <button class="toggle-btn" onclick="toggleSidebar()">☰ Menu</button>
-
-  <div class="sidebar" id="sidebar">
-    <h2>Table of Contents</h2>
-    <ul>
-      <li><a href="#scorecard">College Scorecard Data Snapshot</a></li>
-      <li><a href="#threshold0">Threshold 0</a></li>
-      <li><a href="#threshold1">Threshold 1</a></li>
-    </ul>
-  </div>
-
   <div class="content" id="content">
+    <h1> Introduction</h1>
+    <p>
+      EdTrust’s mission is to advance policies and practices to dismantle the 
+      racial and economic barriers embedded in the American education system. 
+      We approached our research project with the purpose of addressing 
+      larger systemic issues with American higher education. 
+      <br> <br>
+      ROI frameworks help prospective students and their families plan for higher education, 
+      and so the way in which ROI is calculated and presented to families is extremely 
+      important in determining which institutions get more or less funding or resources. 
+      Current ROI frameworks focus on a purely economic model (most often, 
+      a debt-to-earnings ratio), which neglects student body characteristics that 
+      also influence post-graduate success. <br><br> Our research fills a critical gap 
+      in existing ROI frameworks by specifically examining how the calculation of ROI changes for
+       Minority-Serving Institutions (MSIs) and Predominantly White Institutions 
+       (PWIs) when controlling for key student body characteristics. Traditional 
+       models assess ROI at the institutional or program level but often overlook 
+       how institutional type intersects with student demographics, socioeconomic 
+       status, and structural barriers like labor market discrimination. By 
+       integrating controllable factors like student body characteristics into our 
+       analysis, we aim to determine whether disparities in ROI persist due to 
+       institutional differences or broader systemic inequities. Our refined 
+       approach provides a more accurate and equitable measure of postsecondary 
+       value, ensuring a fairer assessment of institutions that serve historically
+        underrepresented students. Our findings would not only sharpen ROI 
+        calculations but also inform policy debates on funding and resource 
+        allocation between MSIs and PWIs.
+    </p>
+  <hr>
     <h1 id="scorecard">College Scorecard Data Snapshot</h1>
     <div id="table"></div>
 
-    <h1 id="threshold0">Threshold 0</h1>
-    <div id="table-threshold0"></div>
-
-    <h1 id="threshold1">Threshold 1</h1>
-    <div id="table-threshold1"></div>
+    <h1 id="threshold0">Postsecondary Value Commission: Threshold 0</h1>
     <section id="threshold1-framework">
-      <h2>Threshold 1: Framework</h2>
+      <h2>Calculation Framework</h2>
+      <p>
+        <strong>Minimum Economic Return:</strong>  
+        “A student meets this threshold if they earn at least as 
+        much as a high school graduate plus enough to recoup their 
+        total net price plus interest within ten years.”
+        <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
+      </p>
+      <p>
+        <strong>An institution meets Threshold 0 if:</strong><br/>
+        10 * (Median salary after higher education degree) ≥ 
+        10 * (Median state-level salary for high school degree earners) + 
+        (Average Net Price * Average Time to Credential)
+      </p>
+      <h2>Table of Results and Relevant Variables</h2>
+    </section>
+
+    <div id="table-threshold0"></div>
+    <h2>Regression Models</h2>
+    <img
+        src="threshold0logoddsmsitype.png"
+        alt="Logit Regression plot by MSI type"
+        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
+    />
+
+    <img
+        src="threshold0logoddsdemographic.png"
+        alt="Logit Regression plot by Demographic"
+        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
+    />
+
+    
+    <hr>
+    <h1 id="threshold1">Postsecondary Value Commission: Threshold 1</h1>
+    <div id="table-threshold1"></div>
+    <section id="threshold-framework">
+      <h2>Calculation Framework</h2>
       <p>
         <strong>IHEP Earnings Premium:</strong>  
         “A student meets this threshold if they reach at least median earnings in their field of
         study (or, if field of study data is unavailable, the median earnings for the institution’s
-        predominant degree type).” (p. 40)
+        predominant degree type).”
+        <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
       </p>
       <h3>Current Calculations</h3>
       <ul>
@@ -142,16 +166,43 @@
         between each demographic share and earnings relative to the White student baseline.
       </p>
     </section>
+  
+    <hr>
+    <h1 id="threshold0">Postsecondary Value Commission: Threshold 2</h1>
+    <section id="threshold1-framework">
+      <h2>Calculation Framework</h2>
+      <p>
+        <strong>Earnings Parity:</strong>  
+        “This threshold measures whether students of color, students from low-income backgrounds,
+        and women reach the median earnings of their systemically more advantaged peers 
+        (White students, high-income students, or men).”
+        <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
+      </p>
+      <p>
+        <strong>An institution meets Threshold 2 if both conditions are true:</strong><br/>
+        <li>
+          Income Equity: The median earnings of its low-income students (from the lowest 
+          income tercile) are equal to or greater than those of its high-income students
+          (from the highest income tercile) 10 years after enrollment.
+        </li>
+        <li>
+          Gender Equity: The median earnings of female graduates are equal to or greater 
+          than those of male graduates 10 years after enrollment.
+        </li>
+      </p>
+      <h2>Table of Results and Relevant Variables</h2>
+    </section>
+    <div id="table-threshold2"></div>
+    <h2>Regression Models</h2>
+
+    <hr>
+    <h1 id="conclusions">Overall Takeaways</h1>
+    <p>
+      HERE WE WILL GIVE SOME GENERAL CONCLUSIONS!
+    </p>
   </div>
 
   <script>
-    function toggleSidebar() {
-      const sidebar = document.getElementById("sidebar");
-      const content = document.getElementById("content");
-      sidebar.classList.toggle("hidden");
-      content.classList.toggle("full");
-    }
-
     // Load main CSV: pep_roi.csv
     Papa.parse("pep_roi.csv", {
       download: true,
