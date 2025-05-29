@@ -78,17 +78,49 @@
 
     <div id="table-threshold0"></div>
     <h2>Regression Models</h2>
+    <p>
+      We estimated how controlling for the share of Pell Grant recipients 
+      affects the likelihood that different Minority‑Serving Institution (MSI) types meet Threshold 0.
+    </p>
     <img
         src="threshold0logoddsmsitype.png"
         alt="Logit Regression plot by MSI type"
         style="max-width:100%; height:auto; display:block; margin:1rem 0;"
     />
+    <p>
+      <li> Tribal Colleges stand out as being far less likely to meet Threshold 0 than 
+      other institutions. This holds true across both the reduced model and model with 
+      Pell Grant percentage. The difference is large and meaningful, suggesting that 
+      these colleges may be facing major challenges. </li>
+      <li>Other types of MSIs (such as HBCUs, HSIs, PBIs, etc.) don’t show strong 
+        differences from the baseline; their chances of meeting the benchmark are
+         about the same as non-MSI institutions. </li>
+      <li>These findings point to possible systemic barriers or underfunding facing 
+        Tribal Colleges specifically.</li>
+        <br><br> We replace the MSI flags with continuous demographic shares—% Asian, 
+        % Black, % Hispanic, etc.—to see how each group’s concentration relates 
+        to earnings once Pell % is controlled.
+    </p>
 
     <img
         src="threshold0logoddsdemographic.png"
         alt="Logit Regression plot by Demographic"
         style="max-width:100%; height:auto; display:block; margin:1rem 0;"
     />
+
+    <p>
+      <li>Colleges with higher percentages of Native Hawaiian or Pacific Islander (NHPI) 
+        and American Indian/Alaska Native (AIAN) students are less likely to meet the benchmark.
+        These are significant negative effects, meaning they are not likely to be due to chance.</li>
+
+      <li> Schools with more low-income students (Pell Grant recipients) 
+      are actually more likely to meet the benchmark.</li>
+
+      <li>
+        Other demographics (like Black and Hispanic percentages) show smaller or unclear effects.
+        Asian student percentage has a small positive effect—colleges with more Asian 
+        students slightly outperform others on this measure.</li>
+    </p>
 
     
     <hr>
@@ -169,7 +201,7 @@
   
     <hr>
     <h1 id="threshold0">Postsecondary Value Commission: Threshold 2</h1>
-    <section id="threshold1-framework">
+    <section id="threshold2-framework">
       <h2>Calculation Framework</h2>
       <p>
         <strong>Earnings Parity:</strong>  
