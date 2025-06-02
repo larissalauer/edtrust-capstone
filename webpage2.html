@@ -122,7 +122,7 @@
       non-MSIs on average, and a negative effect indicates worse average performance.
       <br> <br>
       We then ran that same model but included an additional variable for the percentage of students at an institution that receive a 
-      Pell Grant, which is a poxy for the student body’s general socio-economic status. The coefficient for Pell Grant percentage can be 
+      Pell Grant, which is a poxy for the student body’s general socioeconomic status. The coefficient for Pell Grant percentage can be 
       interpreted as the expected increase in ROI for a one percent increase in the percentage of students receiving Pell Grants, holding 
       other variables constant. We are particularly interested in the difference between the Pell Grant and non-Pell Grant models. If the 
       coefficients for MSI variables shift between models, this would suggest that some of the apparent differences in ROI associated with 
@@ -269,7 +269,7 @@
         <li><strong>ANNHI, NANTI, AANAPII:</strong> Experience a modest decrease (≈ $2,000).</li>
       </ul>
       <p>
-        Overall, the impact of Pell % is heterogeneous. Because MSI classification is based on
+        Overall, the impact of controlling for Pell % is heterogeneous. Because MSI classification is based on
         whether each subgroup exceeds a fixed threshold (typically ≥ 25 %), using continuous
         demographic percentages could yield more nuanced insights than a simple binary flag.
       </p>
@@ -288,8 +288,17 @@
         style="max-width:100%; height:auto; display:block; margin:1rem 0;"
       />
       <p>
+        Dispite the smaller x-axis in this new figure, the effects of demographic percentages are still 
+        quite substantial. For example, a 1% increase in Pell students is associated with a $320 decrease 
+        in expected earning. Assuming an approximately linear relationship (as tests of curvilinear models 
+        suggest the linear model provides a reasonably good fit), a school with 30% more students with Pell 
+        Grants is associated with students earning nearly $10,000 less on average ten years after enrollment. 
+        <br><br>
         Aside from Asian students, controlling for Pell % amplifies the positive association 
-        between each demographic share and earnings relative to the White student baseline.
+        between each demographic share and earnings relative to the White student baseline. These 
+        findings provide strong evidence that this ROI measure disadvantages schools with higher 
+        minority populations by confounding return on investment with the effects of 
+        prior socioeconomic status. 
       </p>
     </section>
   
