@@ -133,8 +133,10 @@
       (<a href="https://nces.ed.gov/pubs2008/2008156.pdf#page=7" target="_blank">generally ≥ 25%, except for HBCUs & TCUs</a>), 
       it may be more informative to use demographic percentages rather than simplified dichotomous variables. These variables can better 
       incorporate the continuous variation in student body composition across institutions and provide a more nuanced understanding of 
-      how demographic features relate to ROI. Similar to Pell percentage, coefficients can be interpreted as the expected increase in ROI 
-      for a one percent increase in the percentage of students of a given race/ethnicity at a school, controlling for the other variables.
+      how demographic features relate to ROI. We used the following demographic variables: Black %, Hispanic %, Asian %, AIAN % (American 
+      Indian or Alaska Native), and NHPI % (Native Hawaiian or Pacific Islander). Similar to Pell percentage, coefficients can be 
+      interpreted as the expected increase in ROI for a one percent increase in the percentage of students of a given race/ethnicity 
+      at a school, controlling for the other variables.
       <br> <br>
       We also performed similar analyses using logit regression to model whether a school meets an ROI threshold as a function of Pell 
       percentage, MSI type, and race/ethnicity percentages. While these threshold-based approaches offer a straightforward way to evaluate 
@@ -288,9 +290,9 @@
         style="max-width:100%; height:auto; display:block; margin:1rem 0;"
       />
       <p>
-        Dispite the smaller x-axis in this new figure, the effects of demographic percentages are still 
-        quite substantial. For example, a 1% increase in Pell students is associated with a $320 decrease 
-        in expected earning. Assuming an approximately linear relationship (as tests of curvilinear models 
+        Despite the smaller x-axis in this new figure, the effects of demographic percentages are still quite 
+        substantial. For example, a 1% increase in Pell students is associated with a $320 decrease in 
+        expected earnings. Assuming an approximately linear relationship (as tests of curvilinear models 
         suggest the linear model provides a reasonably good fit), a school with 30% more students with Pell 
         Grants is associated with students earning nearly $10,000 less on average ten years after enrollment. 
         <br><br>
@@ -299,6 +301,26 @@
         findings provide strong evidence that this ROI measure disadvantages schools with higher 
         minority populations by confounding return on investment with the effects of 
         prior socioeconomic status. 
+      </p>
+    </section>
+    <section id="threshold1-demographics-logit">
+      <h2>Threshold 1: Logit Regression Model with Demographics</h2>
+      <p>
+        We then modeled the log-odds of meeting threshold 1 as a function of demographic features using logit regression. 
+        See the Postsecondary Value Commission section for a review of how to interpret the coefficients.
+      </p>
+      <img
+        src="Threshold1_logit_demographics.png"
+        alt="Logit regression plot of threshold 1 with demographic features"
+        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
+      />
+      <p>
+        Overall, the effect of Black and NHPI percentage marginally improved after controlling for Pell percentage, the 
+        other effect of Asian percentage slightly decreased, and the effects of the variables stayed about constant. 
+        <br><br>
+        Because the OLS model uses the full continuous ROI measure rather than a binary threshold, it retains more information and 
+        offers more interpretable estimates of the relationship between demographic composition and ROI. We therefore find 
+        its results to be most informative and useful.
       </p>
     </section>
   
