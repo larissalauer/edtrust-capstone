@@ -6,4 +6,3 @@ The code for our current iteration of this website can be found in <a href="http
 
 We would like to thank EdTrust for their mentorship and guidance with this project!
 </p>
-<a href="https://www.example.com">Click here to visit Example</a>
