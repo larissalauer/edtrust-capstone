@@ -5,6 +5,9 @@
   <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
   <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     body {
       font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -96,6 +99,79 @@
     <div id="table"></div>
     
     <a href="pep_roi.csv" download class="download-button">Download Dataset</a>
+
+  <hr>
+    <h1 id="scorecard">Third Way's Price to Earnings Premium (PEP) Model</h1>
+    
+    <section>
+      <h2>Calculation Framework</h2>
+    
+      <p>
+        Third Way’s Price-to-Earnings Premium (PEP) Model is a way to understand whether going to a specific college is worth the cost, by calculating how long it would take for the average student who graduates in 4 years to recoup, or “earn back” the money they spent on their degree. For some schools, the average student is never expected to recoup the cost of their degree, because graduates don’t make more money than the average high school graduate in their state; in other words, students from these schools make the same amount of money with their degree as they would have had they never graduated college in the first place.
+      </p>
+    
+      <p>
+        The original calculation, created by Third Way, uses the following formula:
+      </p>
+
+        <div style="background-color: #fff9db; border-left: 6px solid #ffe066; padding: 12px; margin: 10px 0;">
+          <p>
+            $$\textbf{Number of years to recoup net cost} = \frac{(\text{Total average net price} \times 4 \text{ years})}{(\text{Post-enrollment earnings} - \text{Typical high school salary})}$$
+          </p>
+        </div>
+    
+      <p>
+        This calculation results in negative results for institutions where the typical salary of a graduate from that institution is less than the typical salary of a high school graduate in the same state. Therefore, if an institution has a negative PEP-ROI score, the average graduate of this institution will never recoup the cost of their degree. The more negative the number, the larger the gap in earnings for graduates of the institution and high school graduates. If the institution has a positive PEP-ROI score, the value of the score translates to the number of years it would take the average student to recoup the cost of their credential.
+      </p>
+    
+      <p>
+        For this analysis, we consider the “best value” schools to be ones where the cost of the credential is recouped quickly, in just a few years. This means that the strength of an institution’s PEP-ROI score increases as its number shrinks towards 0 years to recoup cost. However, that pattern changes at 0, since a PEP-ROI score less than 0 is a very weak score. This feature of Third Way’s original calculation of PEP-ROI scores makes it much harder to conduct statistical analysis of institutions’ ROI data.
+      </p>
+    
+      <p>
+        To deal with this, we made an adjustment to the original formula. By taking the inverse of the PEP-ROI score (so 1 divided by the original score), we get scores such that an increase in modified PEP-ROI score translates to a “better value” for an institution. This solves the problem we were facing with the original PEP-ROI score because the interpretation of our modified PEP-ROI scores is consistent for both positive and negative values.
+      </p>
+    
+      <p>To recap, our modified calculation for PEP-ROI is:</p>
+
+      <div style="background-color: #fff9db; border-left: 6px solid #ffe066; padding: 12px; margin: 10px 0;">
+        <p>
+          $$\textbf{Modified PEP-ROI} = \frac{(\text{Post-enrollment earnings} - \text{Typical high school salary})}{(\text{Total average net price} \times 4 \text{ years})}$$
+        </p>
+      </div>
+
+      <hr>
+    
+      <h3>Relevant Variables</h3>
+    
+      <p>To build this model, we used data from two main sources:</p>
+    
+      <h4>College Scorecard Data (Institution-level data):</h4>
+      <ul>
+        <li><code>STABBR</code>: The state where the college is located.</li>
+        <li><code>MN_EARN_WNE_P10</code>: Average earnings of college graduates 10 years after they started college.</li>
+        <li><code>NPT4_PUB</code>: Average yearly cost of attendance for public colleges.</li>
+        <li><code>NPT4_PRIV</code>: Average yearly cost of attendance for private colleges.</li>
+      </ul>
+      <p>We multiplied the average yearly cost by 4 to estimate the full cost of a 4-year degree.</p>
+    
+      <h4>Third Way 2023 Data:</h4>
+      <ul>
+        <li><code>Median State Salaries with Positive Earnings (High School Diploma or Equivalent)</code>: This gives the typical income for high school graduates in each state, which we use for comparison.</li>
+      </ul>
+    </section>
+    
+
+    <h2>Table of Results</h2>
+    <div id="table"></div>
+    <h1> Further Analysis of the PEP Model</h1>
+    <h2>Trends across Minority-Serving Institutions</h2>
+    <h2>Trends across Demographic Groups</h2>
+    <p>
+    </p>
+    
+    <hr>
+    
 
     <h1>Postsecondary Value Commission ROI Frameworks</h1>
     <p>
