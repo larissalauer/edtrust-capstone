@@ -167,7 +167,7 @@
     
 
     <h2>Table of Results</h2>
-    <div id="table"></div>
+    <a href="pep_roi_data.csv" download class="download-button">Download Dataset</a>
     <h1> Further Analysis of the PEP Model</h1>
     <h2>Trends across Minority-Serving Institutions</h2>
     <img src="msis_pep_boxplot.png" alt="Description of image" style="display:block; margin:auto; width:50%;">
@@ -505,6 +505,34 @@
         }).render(document.getElementById("table"));
       }
     });
+
+    //load csv: pep_roi_data.csv
+    <script>
+    fetch('pep_roi_data.csv')
+      .then(response => response.text())
+      .then(data => {
+        const rows = data.trim().split('\n');
+        const table = document.createElement('table');
+        table.style.borderCollapse = 'collapse';
+        table.style.width = '100%';
+    
+        rows.forEach((row, i) => {
+          const tr = document.createElement('tr');
+          const cells = row.split(',');
+          cells.forEach(cell => {
+            const td = document.createElement(i === 0 ? 'th' : 'td');
+            td.textContent = cell;
+            td.style.border = '1px solid #ccc';
+            td.style.padding = '6px';
+            tr.appendChild(td);
+          });
+          table.appendChild(tr);
+        });
+
+    document.getElementById('table').appendChild(table);
+  });
+</script>
+
 
     // Load threshold0.csv
     Papa.parse("threshold0.csv", {
