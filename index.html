@@ -507,29 +507,24 @@
     });
 
     //load csv: pep_roi_data.csv
-    fetch('pep_roi_data.csv')
-      .then(response => response.text())
-      .then(data => {
-        const rows = data.trim().split('\n');
-        const table = document.createElement('table');
-        table.style.borderCollapse = 'collapse';
-        table.style.width = '100%';
-    
-        rows.forEach((row, i) => {
-          const tr = document.createElement('tr');
-          const cells = row.split(',');
-          cells.forEach(cell => {
-            const td = document.createElement(i === 0 ? 'th' : 'td');
-            td.textContent = cell;
-            td.style.border = '1px solid #ccc';
-            td.style.padding = '6px';
-            tr.appendChild(td);
-          });
-          table.appendChild(tr);
-        });
+    Papa.parse("pep_roi.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        const headers = results.meta.fields;
+        const rows = results.data.map(row => headers.map(h => row[h]));
 
-    document.getElementById('table').appendChild(table);
-  });
+        new gridjs.Grid({
+          columns: headers,
+          data: rows,
+          search: true,
+          pagination: { limit: 10 },
+          sort: true,
+          fixedHeader: true,
+          height: '500px'
+        }).render(document.getElementById("table"));
+      }
+    });
 
 
     // Load threshold0.csv
