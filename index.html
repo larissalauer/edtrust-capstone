@@ -192,6 +192,7 @@
     <div id="pep_table"></div>
     <a href="pep_roi_data.csv" download class="download-button">Download Dataset</a>
     
+    <br><br>
     <h1> Further Analysis of the PEP Model</h1>
 
     <h2>Trends across Minority-Serving Institutions</h2>
@@ -240,65 +241,12 @@
       </div>
      
     
-
+    <br><br><br>
     <h1>Postsecondary Value Commission ROI Frameworks</h1>
     <p>
-      In the following sections, we highlight the major results from our analysis of 
-      <a href="https://www.postsecondaryvalue.org/our-work/measuring-value/" target="_blank">ROI frameworks from the Postsecondary Value Commission</a>. 
-      These frameworks have two parts: an institution’s ROI score and a binary indicator for whether the school meets 
-      a certain threshold. For each framework, we first ran an ordinary least squares (OLS) regression model to measure the 
-      relationship between MSI type and ROI. 
-      <br> <br>
-      We consider the following MSI designations: 
-      <ul>
-        <li>Historically Black College or University (HBCU)</li>
-        <li>Predominantly Black Institution (PBI)</li>
-        <li>Alaska Native-/Native Hawaiian-Serving Institution (ANNHI)</li>
-        <li>Tribal College or University (TRIBAL)</li>
-        <li>Asian American-/Native American-Pacific Islander-Serving Institution (AANAPII)</li>
-        <li>Hispanic-Serving Institution (HSI)</li>
-        <li>Native American Non-Tribal Institution (NASNTI)</li>
-      </ul>
-      We present the model results in plots that show the coefficient for each variable (in this case, each MSI type) and the associated 
-      95% confidence interval. We also tested the appropriateness of each model and used robust standard errors where relevant, though we 
-      omit detailed discussion for brevity. Because our analysis draws on a comprehensive dataset of all U.S. colleges rather than a 
-      sampled subset, effect sizes are more meaningful than confidence intervals in interpreting the results. For OLS models in which 
-      ROI is regressed on the MSI variables, each coefficient can be interpreted as the expected ROI for attending a given MSI type above 
-      the expected ROI for attending a non-MSI school. A positive effect, therefore, indicates that an MSI type performs better than 
-      non-MSIs on average, and a negative effect indicates worse average performance.
-      <br> <br>
-      We then ran that same model but included an additional variable for the percentage of students at an institution that receive a 
-      Pell Grant, which is a poxy for the student body’s general socioeconomic status. The coefficient for Pell Grant percentage can be 
-      interpreted as the expected increase in ROI for a one percent increase in the percentage of students receiving Pell Grants, holding 
-      other variables constant. We are particularly interested in the difference between the Pell Grant and non-Pell Grant models. If the 
-      coefficients for MSI variables shift between models, this would suggest that some of the apparent differences in ROI associated with 
-      MSI status might actually be due to differences in the economic background of students. 
-      <br> <br>
-      We also considered student body race and ethnicity variables instead of MSI type indicators. Because the classification of schools 
-      into different MSI types is based on the percentage of students from certain backgrounds 
-      (<a href="https://nces.ed.gov/pubs2008/2008156.pdf#page=7" target="_blank">generally ≥ 25%, except for HBCUs & TCUs</a>), 
-      it may be more informative to use demographic percentages rather than simplified dichotomous variables. These variables can better 
-      incorporate the continuous variation in student body composition across institutions and provide a more nuanced understanding of 
-      how demographic features relate to ROI. We used the following demographic variables: Black %, Hispanic %, Asian %, AIAN % (American 
-      Indian or Alaska Native), and NHPI % (Native Hawaiian or Pacific Islander). Similar to Pell percentage, coefficients can be 
-      interpreted as the expected increase in ROI for a one percent increase in the percentage of students of a given race/ethnicity 
-      at a school, controlling for the other variables.
-      <br> <br>
-      We also performed similar analyses using logit regression to model whether a school meets an ROI threshold as a function of Pell 
-      percentage, MSI type, and race/ethnicity percentages. While these threshold-based approaches offer a straightforward way to evaluate 
-      institutional performance, they simplify the continuous ROI metrics into binary outcomes, potentially masking meaningful differences 
-      across schools. For this reason, we prioritize the OLS results and recommend against overly relying on dichotomous variables when 
-      analyzing ROI.
-      <br> <br>
-      Interpretation of coefficients for logit models is less straightforward than with OLS models. They now represent the log odds of a 
-      school meeting the threshold. To provide some intuition for interpreting these log odds, we outline how different log-odd values 
-      translate into odds. A log odds of 0 corresponds to a 50/50 chance of meeting the threshold. 0.2 corresponds to about a 5:4 odds 
-      of meeting the threshold, and -0.2 to about a 4:5 odds. Similarly, 0.4 corresponds to about a 3:2 odds, and -0.4 to about a 2:3 odds.
-      <br> <br>
-      In the rest of this article, we outline each ROI framework, briefly review our main findings, and, at the end, provide some overall 
-      takeaways.
+      These frameworks have two parts: an institution’s ROI score and a binary indicator for whether the school meets a certain threshold.
     </p>
-    
+    <br>
     <h1 id="threshold0">Postsecondary Value Commission: Threshold 0</h1>
     <section id="threshold1-framework">
       <h2>Calculation Framework</h2>
@@ -315,10 +263,12 @@
         10 * (Median state-level salary for high school degree earners) + 
         (Average Net Price * Average Time to Credential)
       </p>
+      <br>
       <h2>Table of Results and Relevant Variables</h2>
+      <div id="table-threshold0"></div>
     </section>
 
-    <div id="table-threshold0"></div>
+    <br><br>
     <h2>Regression Models</h2>
     <p>
       We estimated how controlling for the share of Pell Grant recipients 
@@ -365,11 +315,11 @@
     </p>
 
     
-     
+     <br><br><br>
     <h1 id="threshold1">Postsecondary Value Commission: Threshold 1</h1>
     <div id="table-threshold1"></div>
     <section id="threshold-framework">
-      <h2>Calculation Framework</h2>
+      <h3>Calculation Framework</h3>
       <p>
         <strong>IHEP Earnings Premium:</strong>  
         “A student meets this threshold if they reach at least median earnings in their field of
@@ -469,6 +419,7 @@
         its results to be most informative and useful.
       </p>
     </section>
+    <br>
      
     <h1 id="conclusions">Final Conclusions</h1>
     <p>
@@ -476,6 +427,7 @@
       <br><br>
       We examined the effects of both racial/ethnic demographic and MSI status on an institution’s ROI, using existing ROI calculation metrics. We found that regression models using continuous demographic data instead of binary MSI flags can provide a more nuanced understanding of how student composition relates to return on investment. Notably, institutions with higher shares of low-income and high proportions of certain minority student demographics tend to show lower post-enrollment earnings, even when educational inputs are similar. These findings underscore the importance of adjusting ROI metrics for socioeconomic and demographic factors to avoid unfairly penalizing institutions serving historically marginalized populations. Unfortunately, implementing such adjustments and determining an institution’s true ROI is a non-trivial causal problem that is difficult to contend with without rich student-level data and advanced modeling techniques. Due to the complexity of this problem, we do not propose any revised versions of the frameworks in this report. Our primary purpose has been to identify the ways in which existing ROI frameworks disadvantage certain marginalized groups. Nonetheless, as the Postsecondary Value Commission’s framework evolves, incorporating more granular data by field of study, degree type, and student background will be essential to ensuring a more equitable and accurate assessment of institutional value.
     </p>
+    <br>
     <h2>Discussion</h2>
     <p>
       We want to acknowledge the inherent limitations of research that assesses the value of institutions through a purely economic lens. This approach disregards the soft value provided by institutions of higher education, especially MSIs, which foster cultural preservation, the cultivation of identity, and the development of students’ social capital. Working with thresholds presents a unique problem of creating a binary, which can be an oversimplification of the true effect that they provide. Another limitation of our work was the availability of data: individual programs within institutions are often small enough that data must be privacy-suppressed. There is also a marked lack of data relating to external factors that affect performance on ROI frameworks, such as labor market conditions at the county level.
