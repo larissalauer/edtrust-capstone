@@ -106,6 +106,7 @@
       Interpretation of coefficients for logit models is less straightforward than with OLS models. They now represent the log odds of a school meeting the threshold. To provide some intuition for interpreting these log odds, we outline how different log-odd values translate into odds. A log odds of 0 corresponds to a 50/50 chance of meeting the threshold. 0.2 corresponds to about a 5:4 odds of meeting the threshold, and -0.2 to about a 4:5 odds. Similarly, 0.4 corresponds to about a 3:2 odds, and -0.4 to about a 2:3 odds. We chose to create plots of log-odds rather than odds because it is more standard across the literature, and log-odds are symmetric around 0, unlike odds, which range from 0 to 1 for probabilities less than 50% and 1 to infinity for probabilities greater than 50%. 
     </p>
 
+    <h1>Data Table</h1>
     <div id="table_1"></div>
     <a href="all_roi_metrics.csv" download class="download-button">Download Dataset</a>
   
@@ -264,7 +265,7 @@
         (Average Net Price * Average Time to Credential)
       </p>
       <br>
-      <h2>Table of Results and Relevant Variables</h2>
+      <h2>Table of Results</h2>
       <div id="table-threshold0"></div>
     </section>
 
@@ -274,50 +275,54 @@
       We estimated how controlling for the share of Pell Grant recipients 
       affects the likelihood that different Minority‑Serving Institution (MSI) types meet Threshold 0.
     </p>
-    <img
+    <figure>
+      <img
         src="threshold0_msi.png"
         alt="Logit Regression plot by MSI type"
-        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
-    />
+        style="display:block; margin:auto; width:50%;"/>
+      <figcaption style="text-align: center;"><i>Figure 3: Logit Coefficients for Threshold 0 by MSI Type</i></figcaption>
+    </figure>
+    
     <p>
-      <li> Tribal Colleges stand out as being far less likely to meet Threshold 0 than 
+      Tribal Colleges stand out as being far less likely to meet Threshold 0 than 
       other institutions. This holds true across both the reduced model and model with 
       Pell Grant percentage. The difference is large and meaningful, suggesting that 
-      these colleges may be facing major challenges. </li>
-      <li>Other types of MSIs (such as HBCUs, HSIs, PBIs, etc.) don’t show strong 
+      these colleges may be facing major challenges. 
+      <br><br>
+      Other types of MSIs (such as HBCUs, HSIs, PBIs, etc.) don’t show strong 
         differences from the baseline; their chances of meeting the benchmark are
-         about the same as non-MSI institutions. </li>
-      <li>These findings point to possible systemic barriers or underfunding facing 
-        Tribal Colleges specifically.</li>
-        <br><br> We replace the MSI flags with continuous demographic shares—% Asian, 
+         about the same as non-MSI institutions.
+      <br><br>
+      These findings point to possible systemic barriers or underfunding facing 
+        Tribal Colleges specifically.
+        <br> <br><br>
+         Next, we replace the MSI flags with continuous demographic shares—% Asian, 
         % Black, % Hispanic, etc.—to see how each group’s concentration relates 
         to earnings once Pell % is controlled.
     </p>
-
-    <img
-        src="threshold0_dem.png"
-        alt="Logit Regression plot by Demographic"
-        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
-    />
-
-    <p>
-      <li>Colleges with higher percentages of Native Hawaiian or Pacific Islander (NHPI) 
+    <figure>
+      <img src="threshold0_dem.png"
+          alt="Logit Regression plot by Demographic"
+          style="display:block; margin:auto; width:50%;"/>
+          <figcaption style="text-align: center;"><i>Figure 4: Logit Coefficients for Threshold 0 by Demographics</i></figcaption>
+  </figure>
+    <p> 
+        Colleges with higher percentages of Native Hawaiian or Pacific Islander (NHPI) 
         and American Indian/Alaska Native (AIAN) students are less likely to meet the benchmark.
-        These are significant negative effects, meaning they are not likely to be due to chance.</li>
-
-      <li> Schools with more low-income students (Pell Grant recipients) 
-      are actually more likely to meet the benchmark.</li>
-
-      <li>
+        These are significant negative effects, meaning they are not likely to be due to chance.
+        <br><br>
+      Schools with more low-income students (Pell Grant recipients) 
+      are actually more likely to meet the benchmark.
+      <br><br>
+      
         Other demographics (like Black and Hispanic percentages) show smaller or unclear effects.
         Asian student percentage has a small positive effect—colleges with more Asian 
-        students slightly outperform others on this measure.</li>
+        students slightly outperform others on this measure.
     </p>
 
     
      <br><br><br>
     <h1 id="threshold1">Postsecondary Value Commission: Threshold 1</h1>
-    <div id="table-threshold1"></div>
     <section id="threshold-framework">
       <h3>Calculation Framework</h3>
       <p>
@@ -327,7 +332,7 @@
         predominant degree type).”
         <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
       </p>
-      <h3>Current Calculations</h3>
+      <h3>Our Implementation:</h3>
       <ul>
         <li>
           <strong>Earnings Premium:</strong><br/>
@@ -338,25 +343,49 @@
           Earnings premium ≥ in‑state median earnings for people with bachelor’s degree
         </li>
       </ul>
+      <p>
+        For 10-year post-enrollment earnings, we relied on the MD_EARN_WNE_P10 variable from College Scorecard. 
+        The median earnings for bachelor's degree holders by state were calculated using American Community Survey 
+        (ACS) data. We downloaded microdata from the ACS using IPUMS. We used the most recent 5-year pooled ACS data 
+        and selected the following variables for download: US2023C_SCHL (highest level of schooling completed), 
+        US2023C_PINCP (total personal income), and US2023C_STATE (FIPS state code). Income was then averaged across 
+        states.
+      </p>
+
+      <h2>Table of Results</h2>
+      <div id="table-threshold1"></div>
+
       <h3>Extensions</h3>
       <p>
-        Going forward, you might consider incorporating field‑of‑study data (despite its
-        high missingness — 77.5 %) or differentiating by degree type (e.g., bachelor’s vs.
-        associate’s) to refine the threshold calculation.
+        Future research could modify the current Meeting Threshold 1 variable to compare the earnings of individuals 
+        who attend a 2-year college with the median earnings for associate’s degree holders in the school’s state, 
+        since, under the current calculation, 2-year schools are being unfairly disadvantaged. 
+        <br> <br>
+       <strong>The revised calculation for Meeting Threshold 1 would thus be: </strong>
+        <ul>
+        <li>Earnings  ≥  β⁢ × (state bachelor’s earnings) + (1 - β)⁢ × (state bachelor’s earnings) </li>
+        <br>
+        <i>where β is a binary indicator for whether the school is a 4-year school.</i>
+        </ul>
+        An alternative extension would be to more closely follow the original definition of the framework and incorporate field‑of‑study data. However, due to high missingness (approximately 78% across relevant variables), we opted to only use institution-level data. Using field-of-study-level information on a non-random, large subset of the data undermines the interpretability of the measure and biases the results in ways that are difficult to identify and account for.
       </p>
     </section>
   
     <section id="threshold1-regression">
-      <h2>Threshold 1: Regression Models</h2>
+      <h2>Further Analysis of Threshold 1</h2>
+      <h3>Regression Models</h3>
       <p>
         Next, we estimate how controlling for the share of Pell Grant recipients shifts the relative
         earnings premium across different Minority‑Serving Institution (MSI) types.
       </p>
-      <img
+      <figure>
+        <img
         src="Regression Plot_ Earnings Premium MSI.png"
         alt="Regression plot of earnings premium by MSI type"
-        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
-      />
+        style="display:block; margin:auto; width:50%;"/>
+        <figcaption style="text-align: center;">Figure 5: OLS Effects for Earnings Premium by MSI Type </figcaption>
+      </figure>
+      
       <ul>
         <li>
           <strong>HBCUs:</strong> Move from underperforming to outperforming non‑MSI schools
@@ -367,24 +396,27 @@
         <li><strong>ANNHI, NANTI, AANAPII:</strong> Experience a modest decrease (≈ $2,000).</li>
       </ul>
       <p>
-        Overall, the impact of controlling for Pell % is heterogeneous. Because MSI classification is based on
+        Overall, <strong>the impact of controlling for Pell % is heterogeneous.</strong> Because MSI classification is based on
         whether each subgroup exceeds a fixed threshold (typically ≥ 25 %), using continuous
         demographic percentages could yield more nuanced insights than a simple binary flag.
       </p>
     </section>
   
     <section id="threshold1-demographics">
-      <h2>Threshold 1: Regression Model with Demographics</h2>
+      <h3>Regression Model with Demographics</h3>
       <p>
         We replace the MSI flags with continuous demographic shares—% Asian, % Black,
         % Hispanic, etc.—to see how each group’s concentration relates to earnings once Pell %
         is controlled.
       </p>
-      <img
+      <figure>
+        <img
         src="Regression Plot_ Earnings Premium Demographic.png"
         alt="Regression plot of earnings premium with demographic features"
-        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
-      />
+        style="display:block; margin:auto; width:50%;"/>
+        <figcaption style="text-align: center;">Figure 6: OLS Effects for Earnings Premium by Demographic Features</figcaption>
+      </figure>
+  
       <p>
         Despite the smaller x-axis in this new figure, the effects of demographic percentages are still quite 
         substantial. For example, a 1% increase in Pell students is associated with a $320 decrease in 
@@ -400,16 +432,18 @@
       </p>
     </section>
     <section id="threshold1-demographics-logit">
-      <h2>Threshold 1: Logit Regression Model with Demographics</h2>
+      <h3>Logit Regression Model with Demographics</h3>
       <p>
         We then modeled the log-odds of meeting threshold 1 as a function of demographic features using logit regression. 
         See the Postsecondary Value Commission section for a review of how to interpret the coefficients.
       </p>
-      <img
+      <figure>
+        <img
         src="Threshold1_logit_demographics.png"
         alt="Logit regression plot of threshold 1 with demographic features"
-        style="max-width:100%; height:auto; display:block; margin:1rem 0;"
-      />
+        style="display:block; margin:auto; width:50%;"/>
+        <figcaption style="text-align: center;" ><i>Figure 7: Logit Effects for Threshold 1 by Demographic Features</i> </figcaption>
+      </figure>
       <p>
         Overall, the effect of Black and NHPI percentage marginally improved after controlling for Pell percentage, the 
         other effect of Asian percentage slightly decreased, and the effects of the variables stayed about constant. 
