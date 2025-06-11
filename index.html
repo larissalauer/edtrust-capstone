@@ -45,566 +45,467 @@
 <body>
 
   <div class="content" id="content">
-   
-<h2 style="text-align: center; font-size: 16px;">A Stanford University Data Science Capstone Project (2025)</h2>
-<span style="text-align: center; color: gray; font-size: 14px;">Authors: Michelle Chen, Sebastian Kane, and Larissa Lauer</span>
-
-<h3>Introduction</h3>
+   <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet"><script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script><script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script><script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script><script async="" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<span style="font-size:16px; font-weight: bold;">
+  A Stanford University Data Science Capstone Project (2025)
+</span>
 <p>
-  EdTrust’s mission is to advance policies and practices to dismantle the racial and economic barriers embedded
-  in the American education system. We approached our research project with the goal of examining larger systemic
-  issues with American higher education.
-</p>    <p>
-  Return on investment (ROI) frameworks inform educational policies and help prospective students and their families
-  plan for higher education, so the way in which ROI is calculated and presented is extremely important in determining
-  which institutions receive more or less funding, resources, and students. Current ROI frameworks largely focus on a
-  purely economic model (most often, a debt-to-earnings ratio), which neglects student body characteristics that also
-  influence post-graduate success.
-</p>    <p>
-  Our research fills a critical gap in existing ROI frameworks by specifically examining how the calculation of ROI
-  changes for Minority-Serving Institutions (MSIs) and Predominantly White Institutions (PWIs) when controlling for key
-  student body characteristics. Traditional models assess ROI at the institutional or program level but often overlook
-  how institutional type intersects with student demographics, socioeconomic status, and structural barriers like labor
-  market discrimination. By integrating factors like student body characteristics into our analysis, we
-  aim to determine whether disparities in ROI persist due to institutional differences or broader systemic inequities.
-  Our refined approach provides a more accurate and equitable measure of postsecondary value, ensuring a fairer
-  assessment of institutions that serve historically underrepresented students. Our findings would not only sharpen
-  ROI calculations but also inform policy debates on funding and resource allocation between MSIs and PWIs.
+  <span style="color:gray;font-size:14px;">Authors: Michelle Chen, Sebastian Kane, and Larissa Lauer</span>
 </p>
-
-<h3>Methods</h3>
+<h2>
+  Introduction
+</h2>
 <p>
-  We primarily relied on College Scorecard data to construct this dataset and calculate the measures of ROI. For the
-  median
-  state salary of high school graduates, we used a dataset from Third Way. For each of the ROI frameworks, we based our
-  implementation on a combination of the original institution’s documentation and, when necessary, precedent set by
-  EdTrust.
-  The specific calculation for each framework is documented in each section.
-</p>    <p>
-  For our data analysis, we used a combination of R and Python in Deepnote, which allowed us to collaborate on notebooks
-  and share figures we created.
-</p>    <p>
-  For each framework, we first ran an ordinary least squares (OLS) regression model to measure the relationship between
-  MSI type and ROI. We consider the following MSI designations provided by College Scorecard:
+  EdTrust’s mission is to advance policies and practices to dismantle the racial and economic barriers embedded in the American education system. We approached our research project with the goal of examining larger systemic issues with American higher education.
+</p>
+<p>
+  Return on investment (ROI) frameworks inform educational policies and help prospective students and their families plan for higher education, so the way in which ROI is calculated and presented is extremely important in determining which institutions receive more or less funding, resources, and students. Current ROI frameworks largely focus on a purely economic model (most often, a debt-to-earnings ratio), which neglects student body characteristics that also influence post-graduate success.
+</p>
+<p>
+  Our research fills a critical gap in existing ROI frameworks by specifically examining how the calculation of ROI changes for Minority-Serving Institutions (MSIs) and Predominantly White Institutions (PWIs) when controlling for key student body characteristics. Traditional models assess ROI at the institutional or program level but often overlook how institutional type intersects with student demographics, socioeconomic status, and structural barriers like labor market discrimination. By integrating factors like student body characteristics into our analysis, we aim to determine whether disparities in ROI persist due to institutional differences or broader systemic inequities. Our refined approach provides a more accurate and equitable measure of postsecondary value, ensuring a fairer assessment of institutions that serve historically underrepresented students. Our findings would not only sharpen ROI calculations but also inform policy debates on funding and resource allocation between MSIs and PWIs.
+</p>
+<h2>
+  Methods
+</h2>
+<p>
+  We primarily relied on College Scorecard data to construct this dataset and calculate the measures of ROI. For the median state salary of high school graduates, we used a dataset from Third Way. For each of the ROI frameworks, we based our implementation on a combination of the original institution’s documentation and, when necessary, precedent set by EdTrust. The specific calculation for each framework is documented in each section.
+</p>
+<p>
+  For our data analysis, we used a combination of R and Python in Deepnote, which allowed us to collaborate on notebooks and share figures we created.
+</p>
+<p>
+  For each framework, we first ran an ordinary least squares (OLS) regression model to measure the relationship between MSI type and ROI. We consider the following MSI designations provided by College Scorecard:
 </p>
 <ul>
-  <li>Historically Black College or University (HBCU)</li>
-  <li>Predominantly Black Institution (PBI)</li>
-  <li>Alaska Native-/Native Hawaiian-Serving Institution (ANNHI)</li>
-  <li>Tribal College or University (TRIBAL)</li>
-  <li>Asian American-/Native American-Pacific Islander-Serving Institution (AANAPII)</li>
-  <li>Hispanic-Serving Institution (HSI)</li>
-  <li>Native American Non-Tribal Institution (NASNTI)</li>
+  <li>
+    Historically Black College or University (HBCU)
+  </li>
+  <li>
+    Predominantly Black Institution (PBI)
+  </li>
+  <li>
+    Alaska Native-/Native Hawaiian-Serving Institution (ANNHI)
+  </li>
+  <li>
+    Tribal College or University (TRIBAL)
+  </li>
+  <li>
+    Asian American-/Native American-Pacific Islander-Serving Institution (AANAPII)
+  </li>
+  <li>
+    Hispanic-Serving Institution (HSI)
+  </li>
+  <li>
+    Native American Non-Tribal Institution (NASNTI)
+  </li>
 </ul>
 <p>
-  We present the model results in plots that show the coefficient for each variable (in this case, each MSI type) and
-  the associated 95% confidence interval. We also tested the appropriateness of each model and used robust standard
-  errors where relevant, though we omit detailed discussion for brevity. Because our analysis draws on a comprehensive
-  dataset of all U.S. colleges rather than a sampled subset, effect sizes are more meaningful than confidence intervals
-  in interpreting the results. For OLS models in which ROI is regressed on the MSI variables, each coefficient can be
-  interpreted as the expected ROI for attending a given MSI type above the expected ROI for attending a non-MSI school.
-  A positive effect, therefore, indicates that an MSI type performs better than non-MSIs on average, and a negative
-  effect indicates worse average performance.
-</p>    <p>
-  We then ran that same model but included an additional variable for the percentage of students at an institution that
-  receive a Pell Grant, which is a proxy for the student body’s general socioeconomic status. The coefficient for Pell
-  Grant percentage can be interpreted as the expected increase in ROI for a one percent increase in the percentage of
-  students receiving Pell Grants, holding other variables constant. We are particularly interested in the difference
-  between the Pell Grant and non-Pell Grant models. If the coefficients for MSI variables shift between models, this
-  would suggest that some of the apparent differences in ROI associated with MSI status might actually be due to
-  differences in the economic background of students.
-</p>    <p>
-  We also considered student body race and ethnicity variables instead of MSI type indicators. Because the
-  classification of schools into different MSI types is based on the percentage of students from certain backgrounds
-  (generally ≥ 25%, except for HBCUs & TCUs), it may be more informative to use demographic percentages rather than
-  simplified dichotomous variables. These variables can better incorporate the continuous variation in student body
-  composition across institutions and provide a more nuanced understanding of how demographic features relate to ROI. We
-  used the following demographic variables: Black %, Hispanic %, Asian %, AIAN % (American Indian or Alaska Native), and
-  NHPI % (Native Hawaiian or Pacific Islander). Similar to Pell percentage, coefficients can be interpreted as the
-  expected increase in ROI for a one percent increase in the percentage of students of a given race/ethnicity at a
-  school, controlling for the other variables.
-</p>    <p>
-  Because the racial percentages sum to approximately 100%, including all racial percentage variables leads to high
-  multicollinearity and inestimable parameters. Intuitively, the effect of a given racial percentage on ROI is not
-  interpretable if all race variables are included because controlling for these other variables effectively constrains
-  the movement of the variable of interest to nothing. As such, we do not use percent White as a variable, and the
-  effect of other race variables can be interpreted as being relative to the effect of this omitted percent White
-  variable. Likewise, the effect of the percent Hispanic variable can be interpreted relative to the effect of an
-  omitted percent non-Hispanic variable. This same logic explains why the estimates of the MSI model are interpretive
-  relative to non-MSI schools.
-</p>    <p>
-  Besides simple regression analysis, we also performed logit regression for the Postsecondary Value Commission
-  framework to model whether a school meets an ROI threshold as a function of Pell percentage, MSI type, and
-  race/ethnicity percentages. We chose to conduct logit regression as it is better suited for the binary-based
-  interpretation of a threshold. While these threshold-based approaches offer a straightforward way to evaluate
-  institutional performance, they simplify the continuous ROI metrics into binary outcomes, potentially masking
-  meaningful differences across schools. For this reason, we prioritize the OLS results and recommend against overly
-  relying on dichotomous variables when analyzing ROI.
-</p>    <p>
-  Interpretation of coefficients for logit models is less straightforward than with OLS models. They now represent the
-  log odds of a school meeting the threshold. To provide some intuition for interpreting these log odds, we outline how
-  different log-odd values translate into odds. A log odds of 0 corresponds to a 50/50 chance of meeting the threshold.
-  0.2 corresponds to about a 5:4 odds of meeting the threshold, and -0.2 to about a 4:5 odds. Similarly, 0.4 corresponds
-  to about a 3:2 odds, and -0.4 to about a 2:3 odds. We chose to create plots of log-odds rather than odds because it is
-  more standard across the literature, and log-odds are symmetric around 0, unlike odds, which range from 0 to 1 for
-  probabilities less than 50% and 1 to infinity for probabilities greater than 50%.
+  We present the model results in plots that show the coefficient for each variable (in this case, each MSI type) and the associated 95% confidence interval. We also tested the appropriateness of each model and used robust standard errors where relevant, though we omit detailed discussion for brevity. Because our analysis draws on a comprehensive dataset of all U.S. colleges rather than a sampled subset, effect sizes are more meaningful than confidence intervals in interpreting the results. For OLS models in which ROI is regressed on the MSI variables, each coefficient can be interpreted as the expected ROI for attending a given MSI type above the expected ROI for attending a non-MSI school. A positive effect, therefore, indicates that an MSI type performs better than non-MSIs on average, and a negative effect indicates worse average performance.
 </p>
-
-<h3>Data Table</h3>
-<div id="table_1"></div>
-<a class="download-button" download href="all_roi_metrics.csv">Download Dataset</a>
-
-<h3>How to Use This Dataset</h3>
 <p>
-  The following dataset provides information on the ROI of colleges and universities in the United States for each
-  framework of interest. We include other relevant variables, such as the percentage of students receiving Pell
-  Grants (an indicator of socioeconomic status), MSI type, and racial demographics. We primarily relied on
-  <a href="https://collegescorecard.ed.gov/data" rel="noopener noreferrer" target="_blank">College Scorecard data</a>
-  to construct this dataset and calculate the measures of ROI.
-</p>    <p>
-  You can sort the columns of this table in ascending order and descending order to see which institutions have the
-  most extreme values. If you are interested in recreating or further developing our regression analysis, click
-  “Download Dataset” below the table to save a copy of it to your device.
-</p>    <p>
-  Prospective students and parents may also be interested in the ROI of specific schools. These schools can also be
-  found using the search bar. See the discussion below for details on interpreting specific ROI frameworks.
-</p>    <p>
-  We want to caution against blindly relying on ROI measures as indicators of a school’s quality or of the return
-  a student should expect from attending. Indeed, a central finding of our research is that existing ROI frameworks
-  can conflate the individual return on investment a student can realistically expect with the advantages already
-  conferred
-  by their socioeconomic background. In other words, a high ROI may indicate that an institution effectively contributes
-  to
-  student success and career outcomes or that its student body comes from backgrounds that often lead to higher earnings
-  regardless of the institution attended. In the absence of detailed individual-level data on earnings, background, and
-  college of attendance, more work is needed to produce informative and accurate measures of ROI that do not rely on
-  questionable assumptions.
+  We then ran that same model but included an additional variable for the percentage of students at an institution that receive a Pell Grant, which is a proxy for the student body’s general socioeconomic status. The coefficient for Pell Grant percentage can be interpreted as the expected increase in ROI for a one percent increase in the percentage of students receiving Pell Grants, holding other variables constant. We are particularly interested in the difference between the Pell Grant and non-Pell Grant models. If the coefficients for MSI variables shift between models, this would suggest that some of the apparent differences in ROI associated with MSI status might actually be due to differences in the economic background of students.
 </p>
-
-<h3>Third Way's Price to Earnings Premium (PEP) Model</h3>
-
+<p>
+  We also considered student body race and ethnicity variables instead of MSI type indicators. Because the classification of schools into different MSI types is based on the percentage of students from certain backgrounds (generally ≥ 25%, except for HBCUs &amp; TCUs), it may be more informative to use demographic percentages rather than simplified dichotomous variables. These variables can better incorporate the continuous variation in student body composition across institutions and provide a more nuanced understanding of how demographic features relate to ROI. We used the following demographic variables: Black %, Hispanic %, Asian %, AIAN % (American Indian or Alaska Native), and NHPI % (Native Hawaiian or Pacific Islander). Similar to Pell percentage, coefficients can be interpreted as the expected increase in ROI for a one percent increase in the percentage of students of a given race/ethnicity at a school, controlling for the other variables.
+</p>
+<p>
+  Because the racial percentages sum to approximately 100%, including all racial percentage variables leads to high multicollinearity and inestimable parameters. Intuitively, the effect of a given racial percentage on ROI is not interpretable if all race variables are included because controlling for these other variables effectively constrains the movement of the variable of interest to nothing. As such, we do not use percent White as a variable, and the effect of other race variables can be interpreted as being relative to the effect of this omitted percent White variable. Likewise, the effect of the percent Hispanic variable can be interpreted relative to the effect of an omitted percent non-Hispanic variable. This same logic explains why the estimates of the MSI model are interpretive relative to non-MSI schools.
+</p>
+<p>
+  Besides simple regression analysis, we also performed logit regression for the Postsecondary Value Commission framework to model whether a school meets an ROI threshold as a function of Pell percentage, MSI type, and race/ethnicity percentages. We chose to conduct logit regression as it is better suited for the binary-based interpretation of a threshold. While these threshold-based approaches offer a straightforward way to evaluate institutional performance, they simplify the continuous ROI metrics into binary outcomes, potentially masking meaningful differences across schools. For this reason, we prioritize the OLS results and recommend against overly relying on dichotomous variables when analyzing ROI.
+</p>
+<p>
+  Interpretation of coefficients for logit models is less straightforward than with OLS models. They now represent the log odds of a school meeting the threshold. To provide some intuition for interpreting these log odds, we outline how different log-odd values translate into odds. A log odds of 0 corresponds to a 50/50 chance of meeting the threshold. 0.2 corresponds to about a 5:4 odds of meeting the threshold, and -0.2 to about a 4:5 odds. Similarly, 0.4 corresponds to about a 3:2 odds, and -0.4 to about a 2:3 odds. We chose to create plots of log-odds rather than odds because it is more standard across the literature, and log-odds are symmetric around 0, unlike odds, which range from 0 to 1 for probabilities less than 50% and 1 to infinity for probabilities greater than 50%.
+</p>
+<h2>
+  Data Table
+</h2>
+<div id="table_1">
+  &nbsp;
+</div>
+<p>
+  <a class="download-button" href="/sites/default/files/2025-06/all_roi_metrics.csv" download="">Download Dataset</a>
+</p>
+<h3>
+  How to Use This Dataset
+</h3>
+<p>
+  The following dataset provides information on the ROI of colleges and universities in the United States for each framework of interest. We include other relevant variables, such as the percentage of students receiving Pell Grants (an indicator of socioeconomic status), MSI type, and racial demographics. We primarily relied on <a href="https://collegescorecard.ed.gov/data" rel="noopener noreferrer" target="_blank">College Scorecard data</a> to construct this dataset and calculate the measures of ROI.
+</p>
+<p>
+  You can sort the columns of this table in ascending order and descending order to see which institutions have the most extreme values. If you are interested in recreating or further developing our regression analysis, click “Download Dataset” below the table to save a copy of it to your device.
+</p>
+<p>
+  Prospective students and parents may also be interested in the ROI of specific schools. These schools can also be found using the search bar. See the discussion below for details on interpreting specific ROI frameworks.
+</p>
+<p>
+  We want to caution against blindly relying on ROI measures as indicators of a school’s quality or of the return a student should expect from attending. Indeed, a central finding of our research is that existing ROI frameworks can conflate the individual return on investment a student can realistically expect with the advantages already conferred by their socioeconomic background. In other words, a high ROI may indicate that an institution effectively contributes to student success and career outcomes or that its student body comes from backgrounds that often lead to higher earnings regardless of the institution attended. In the absence of detailed individual-level data on earnings, background, and college of attendance, more work is needed to produce informative and accurate measures of ROI that do not rely on questionable assumptions.
+</p>
+<h2>
+  Third Way's Price to Earnings Premium (PEP) Model
+</h2>
 <section>
-  <h2>Calculation Framework</h2>
+  <h3>
+    Calculation Framework
+  </h3>
   <p>
-    Third Way’s Price-to-Earnings Premium (PEP) Model is a way to understand whether going to a specific college is
-    worth the cost, by calculating how long it would take for the average student who graduates in 4 years to recoup, or
-    “earn back” the money they spent on their degree. For some schools, the average student is never expected to recoup
-    the cost of their degree, because graduates don’t make more money than the average high school graduate in their
-    state; in other words, students from these schools make the same amount of money with their degree as they would
-    have had they never graduated college in the first place.
+    Third Way’s Price-to-Earnings Premium (PEP) Model is a way to understand whether going to a specific college is worth the cost, by calculating how long it would take for the average student who graduates in 4 years to recoup, or “earn back” the money they spent on their degree. For some schools, the average student is never expected to recoup the cost of their degree, because graduates don’t make more money than the average high school graduate in their state; in other words, students from these schools make the same amount of money with their degree as they would have had they never graduated college in the first place.
   </p>
   <p>
     The original calculation, created by Third Way, uses the following formula:
   </p>
-  <div style="background-color: #fff9db; border-left: 6px solid #ffe066; padding: 12px; margin: 10px 0;">
-    <p>
-      $$\textbf{Number of years to recoup net cost} = \frac{(\text{Total average net price} \times 4 \text{
-      years})}{(\text{Post-enrollment earnings} - \text{Typical high school salary})}$$
+  <div style="background-color:#fff9db;border-left:6px solid #ffe066;margin:10px 0;padding:12px;">
+    <p class="mj-formula">
+      $$\textbf{Number of years to recoup net cost} = \frac{(\text{Total average net price} \times 4 \text{ years})}{(\text{Post-enrollment earnings} - \text{Typical high school salary})}$$
     </p>
   </div>
   <p>
-    This calculation results in negative results for institutions where the typical salary of a graduate from that
-    institution is less than the typical salary of a high school graduate in the same state. Therefore, if an
-    institution has a negative PEP-ROI score, the average graduate of this institution will never recoup the cost of
-    their degree. The more negative the number, the larger the gap in earnings for graduates of the institution and high
-    school graduates. If the institution has a positive PEP-ROI score, the value of the score translates to the number
-    of years it would take the average student to recoup the cost of their credential.
+    This calculation results in negative results for institutions where the typical salary of a graduate from that institution is less than the typical salary of a high school graduate in the same state. Therefore, if an institution has a negative PEP-ROI score, the average graduate of this institution will never recoup the cost of their degree. The more negative the number, the larger the gap in earnings for graduates of the institution and high school graduates. If the institution has a positive PEP-ROI score, the value of the score translates to the number of years it would take the average student to recoup the cost of their credential.
   </p>
   <p>
-    For this analysis, we consider the “best value” schools to be ones where the cost of the credential is recouped
-    quickly, in just a few years. This means that the strength of an institution’s PEP-ROI score increases as its number
-    shrinks towards 0 years to recoup cost. However, that pattern changes at 0, since a PEP-ROI score less than 0 is a
-    very weak score. This feature of Third Way’s original calculation of PEP-ROI scores makes it much harder to conduct
-    statistical analysis of institutions’ ROI data.
+    For this analysis, we consider the “best value” schools to be ones where the cost of the credential is recouped quickly, in just a few years. This means that the strength of an institution’s PEP-ROI score increases as its number shrinks towards 0 years to recoup cost. However, that pattern changes at 0, since a PEP-ROI score less than 0 is a very weak score. This feature of Third Way’s original calculation of PEP-ROI scores makes it much harder to conduct statistical analysis of institutions’ ROI data.
   </p>
   <p>
-    To deal with this, we made an adjustment to the original formula. By taking the inverse of the PEP-ROI score (so 1
-    divided by the original score), we get scores such that an increase in modified PEP-ROI score translates to a
-    “better value” for an institution. This solves the problem we were facing with the original PEP-ROI score because
-    the interpretation of our modified PEP-ROI scores is consistent for both positive and negative values.
+    To deal with this, we made an adjustment to the original formula. By taking the inverse of the PEP-ROI score (so 1 divided by the original score), we get scores such that an increase in modified PEP-ROI score translates to a “better value” for an institution. This solves the problem we were facing with the original PEP-ROI score because the interpretation of our modified PEP-ROI scores is consistent for both positive and negative values.
   </p>
-
-  <p>To recap, our modified calculation for PEP-ROI is:</p>
-
-  <div style="background-color: #fff9db; border-left: 6px solid #ffe066; padding: 12px; margin: 10px 0;">
-    <p>
-      $$\textbf{Modified PEP-ROI} = \frac{(\text{Post-enrollment earnings} - \text{Typical high school
-      salary})}{(\text{Total average net price} \times 4 \text{ years})}$$
+  <p>
+    To recap, our modified calculation for PEP-ROI is:
+  </p>
+  <div style="background-color:#fff9db;border-left:6px solid #ffe066;margin:10px 0;padding:12px;">
+    <p class="mj-formula">
+      $$\textbf{Modified PEP-ROI} = \frac{(\text{Post-enrollment earnings} - \text{Typical high school salary})}{(\text{Total average net price} \times 4 \text{ years})}$$
     </p>
   </div>
-
-
-  <h3>Relevant Variables</h3>
-
-  <p>To build this model, we used data from two main sources:</p>
-
-  <h4>College Scorecard Data (Institution-level data):</h4>
+  <h3>
+    Relevant Variables
+  </h3>
+  <p>
+    To build this model, we used data from two main sources:
+  </p>
+  <h4>
+    College Scorecard Data (Institution-level data):
+  </h4>
   <ul>
-    <li><code>STABBR</code>: The state where the college is located.</li>
-    <li><code>MN_EARN_WNE_P10</code>: Average earnings of college graduates 10 years after they started college.</li>
-    <li><code>NPT4_PUB</code>: Average yearly cost of attendance for public colleges.</li>
-    <li><code>NPT4_PRIV</code>: Average yearly cost of attendance for private colleges.</li>
+    <li>
+      <code>STABBR</code>: The state where the college is located.
+    </li>
+    <li>
+      <code>MN_EARN_WNE_P10</code>: Average earnings of college graduates 10 years after they started college.
+    </li>
+    <li>
+      <code>NPT4_PUB</code>: Average yearly cost of attendance for public colleges.
+    </li>
+    <li>
+      <code>NPT4_PRIV</code>: Average yearly cost of attendance for private colleges.
+    </li>
   </ul>
-  <p>We multiplied the average yearly cost by 4 to estimate the full cost of a 4-year degree.</p>
-
-  <h4>Third Way 2023 Data:</h4>
+  <p>
+    We multiplied the average yearly cost by 4 to estimate the full cost of a 4-year degree.
+  </p>
+  <h4>
+    Third Way 2023 Data:
+  </h4>
   <ul>
-    <li><code>Median State Salaries with Positive Earnings (High School Diploma or Equivalent)</code>: This gives the
-      typical income for high school graduates in each state, which we use for comparison.
+    <li>
+      <code>Median State Salaries with Positive Earnings (High School Diploma or Equivalent)</code>: This gives the typical income for high school graduates in each state, which we use for comparison.
     </li>
   </ul>
 </section>
-
-
-<h2>Table of Results</h2>
-<div id="pep_table"></div>
+<h3>
+  Table of Results
+</h3>
+<div id="pep_table">
+  &nbsp;
+</div>
 <p>
-  <a class="download-button" download href="pep_roi_data.csv">Download Dataset</a>
+  <a class="download-button" target="_blank" href="pep_roi_data.csv" download="">Download Dataset</a>
 </p>
-<h3> Further Analysis of the PEP Model</h3>
-
-<h4>Trends across Minority-Serving Institutions</h4>
+<h2>
+  Further Analysis of the PEP Model
+</h2>
+<h3>
+  Trends across Minority-Serving Institutions
+</h3>
 <figure>
-  <img alt="Figure 1: Distribution of PEP-ROI by MSI Type" src="msis_pep_boxplot.png"
-       style="display:block; margin:auto; width:50%;">
-  <figcaption style="text-align: center;"><i>Figure 1: Distribution of PEP-ROI by MSI Type</i></figcaption>
+  <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/msis_pep_boxplot.png" alt="Figure 1: Distribution of PEP-ROI by MSI Type">
+  <figcaption style="text-align:center;">
+    <em>Figure 1: Distribution of PEP-ROI by MSI Type</em>
+  </figcaption>
 </figure>
-
 <div class="section">
   <p>
-    This boxplot (Figure 1) shows the distribution of PEP ROI values across different types of MSIs and Non-MSIs. Each
-    box represents the interquartile range of PEP-ROI values for that group, with the thick horizontal line indicating
-    the median.
+    This boxplot (Figure 1) shows the distribution of PEP ROI values across different types of MSIs and Non-MSIs. Each box represents the interquartile range of PEP-ROI values for that group, with the thick horizontal line indicating the median.
   </p>
   <p>
     Our findings:
   </p>
   <ul>
-    <li>AANAPII and HSI institutions tend to show slightly positive median PEP-ROI values, indicating better returns
-      compared to others.
+    <li>
+      AANAPII and HSI institutions tend to show slightly positive median PEP-ROI values, indicating better returns compared to others.
     </li>
-    <li>TRIBAL colleges show a notably lower distribution, with a median well below zero, suggesting significantly lower
-      PEP-ROI performance.
+    <li>
+      TRIBAL colleges show a notably lower distribution, with a median well below zero, suggesting significantly lower PEP-ROI performance.
     </li>
-    <li>Non-MSI schools center closer to zero, with a broader distribution indicating varied outcomes.</li>
+    <li>
+      Non-MSI schools center closer to zero, with a broader distribution indicating varied outcomes.
+    </li>
   </ul>
 </div>
-
-<h4>Trends across Demographic Groups</h4>
+<h3>
+  Trends across Demographic Groups
+</h3>
 <figure>
-  <img alt="Description of image" src="peproi_demographic_features_plot.png"
-       style="display:block; margin:auto; width:50%;">
-  <figcaption style="text-align: center;"><i>Figure 2: PEP-ROI and Demographic Features</i></figcaption>
+  <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/peproi_demographic_features_plot.png" alt="Description of image">
+  <figcaption style="text-align:center;">
+    <em>Figure 2: PEP-ROI and Demographic Features</em>
+  </figcaption>
 </figure>
-
 <div class="section">
   <p>
-    This plot (Figure 2) presents regression coefficients for demographic features predicting PEP-ROI, comparing two
-    models: Original (blue) and With Pell (orange). The “Original” model took into account only the demographic makeup
-    of each institution, while the “With Pell” model took into account both demographic makeup and the proportion of
-    students who are recipients of the Pell Grant at an institution. Each point shows the estimated effect of a 1
-    percentage point increase in demographic composition on PEP-ROI, relative to White undergraduate enrollment. Error
-    bars indicate confidence intervals.
+    This plot (Figure 2) presents regression coefficients for demographic features predicting PEP-ROI, comparing two models: Original (blue) and With Pell (orange). The “Original” model took into account only the demographic makeup of each institution, while the “With Pell” model took into account both demographic makeup and the proportion of students who are recipients of the Pell Grant at an institution. Each point shows the estimated effect of a 1 percentage point increase in demographic composition on PEP-ROI, relative to White undergraduate enrollment. Error bars indicate confidence intervals.
   </p>
   <ul>
-    <li>A higher proportion of Asian students is associated with significantly positive effects on PEP-ROI in both
-      models.
+    <li>
+      A higher proportion of Asian students is associated with significantly positive effects on PEP-ROI in both models.
     </li>
-    <li>Higher proportions of American Indigenous and Alaskan Native (AIAN), Native Hawaiian and Pacific Islander
-      (NHPI), and Black students are associated with negative effects, particularly NHPI, which shows large uncertainty
-      due to a small sample size.
+    <li>
+      Higher proportions of American Indigenous and Alaskan Native (AIAN), Native Hawaiian and Pacific Islander (NHPI), and Black students are associated with negative effects, particularly NHPI, which shows large uncertainty due to a small sample size.
     </li>
-    <li>When Pell eligibility is added, effect sizes are attenuated, suggesting that Pell status mediates the
-      relationship between the demographics of an institution and ROI.
+    <li>
+      When Pell eligibility is added, effect sizes are attenuated, suggesting that Pell status mediates the relationship between the demographics of an institution and ROI.
     </li>
-    <li>The variable for the proportion of Pell recipients (PELL %) at an institution has a negative coefficient,
-      suggesting that institutions serving more Pell-eligible students tend to see lower PEP-ROIs, holding other factors
-      constant.
+    <li>
+      The variable for the proportion of Pell recipients (PELL %) at an institution has a negative coefficient, suggesting that institutions serving more Pell-eligible students tend to see lower PEP-ROIs, holding other factors constant.
     </li>
   </ul>
   <p>
-    This plot underscores how student body composition relates to institutional returns and suggests that socioeconomic
-    factors (like Pell eligibility) partially account for racial/ethnic disparities.
+    This plot underscores how student body composition relates to institutional returns and suggests that socioeconomic factors (like Pell eligibility) partially account for racial/ethnic disparities.
   </p>
 </div>
-
-
-<h3>Postsecondary Value Commission ROI Frameworks</h3>
+<h2>
+  Postsecondary Value Commission ROI Frameworks
+</h2>
 <p>
-  These frameworks have two parts: an institution’s ROI score and a binary indicator for whether the school meets a
-  certain threshold.
+  These frameworks have two parts: an institution’s ROI score and a binary indicator for whether the school meets a certain threshold.
 </p>
-<h3 id="threshold0">Postsecondary Value Commission: Threshold 0</h3>
+<h3 id="threshold0">
+  Postsecondary Value Commission: Threshold 0
+</h3>
 <section id="threshold1-framework">
-  <h2>Calculation Framework</h2>
+  <h4>
+    Calculation Framework
+  </h4>
   <p>
-    <strong>Minimum Economic Return:</strong>
-    “A student meets this threshold if they earn at least as
-    much as a high school graduate plus enough to recoup their
-    total net price plus interest within ten years.”
-    <a
-      href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p.
-      40)</a>
+    <strong>Minimum Economic Return:</strong> “A student meets this threshold if they earn at least as much as a high school graduate plus enough to recoup their total net price plus interest within ten years.” <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
   </p>
   <p>
-    <strong>An institution meets Threshold 0 if:</strong><br/>
-    10 * (Median salary after higher education degree) ≥
-    10 * (Median state-level salary for high school degree earners) +
-    (Average Net Price * Average Time to Credential)
+    <strong>An institution meets Threshold 0 if:</strong><br>
+    10 * (Median salary after higher education degree) ≥ 10 * (Median state-level salary for high school degree earners) + (Average Net Price * Average Time to Credential)
   </p>
-  <h2>Table of Results</h2>
-  <div id="table-threshold0"></div>
+  <h4>
+    Table of Results
+  </h4>
+  <div id="table-threshold0">
+    &nbsp;
+  </div>
 </section>
-
-<h4>Regression Models</h4>
+<h3>
+  Regression Models
+</h3>
 <p>
-  We estimated how controlling for the share of Pell Grant recipients
-  affects the likelihood that different Minority‑Serving Institution (MSI) types meet Threshold 0.
+  We estimated how controlling for the share of Pell Grant recipients affects the likelihood that different Minority‑Serving Institution (MSI) types meet Threshold 0.
 </p>
 <figure>
-  <img
-    alt="Logit Regression plot by MSI type"
-    src="threshold0_msi.png"
-    style="display:block; margin:auto; width:50%;"/>
-  <figcaption style="text-align: center;"><i>Figure 3: Logit Coefficients for Threshold 0 by MSI Type</i></figcaption>
-</figure>
-
-<p>
-  Tribal Colleges stand out as being far less likely to meet Threshold 0 than
-  other institutions. This holds true across both the reduced model and model with
-  Pell Grant percentage. The difference is large and meaningful, suggesting that
-  these colleges may be facing major challenges.
-</p>    <p>
-  Other types of MSIs (such as HBCUs, HSIs, PBIs, etc.) don’t show strong
-  differences from the baseline; their chances of meeting the benchmark are
-  about the same as non-MSI institutions.
-</p>    <p>
-  These findings point to possible systemic barriers or underfunding facing
-  Tribal Colleges specifically.
-</p>    <p>
-  Next, we replace the MSI flags with continuous demographic shares—% Asian,
-  % Black, % Hispanic, etc.—to see how each group’s concentration relates
-  to earnings once Pell % is controlled.
-</p>
-<figure>
-  <img alt="Logit Regression plot by Demographic"
-       src="threshold0_dem.png"
-       style="display:block; margin:auto; width:50%;"/>
-  <figcaption style="text-align: center;"><i>Figure 4: Logit Coefficients for Threshold 0 by Demographics</i>
+  <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/threshold0_msi.png" alt="Logit Regression plot by MSI type">
+  <figcaption style="text-align:center;">
+    <em>Figure 3: Logit Coefficients for Threshold 0 by MSI Type</em>
   </figcaption>
 </figure>
 <p>
-  Colleges with higher percentages of Native Hawaiian or Pacific Islander (NHPI)
-  and American Indian/Alaska Native (AIAN) students are less likely to meet the benchmark.
-  These are significant negative effects, meaning they are not likely to be due to chance.
-</p>    <p>
-  Schools with more low-income students (Pell Grant recipients)
-  are actually more likely to meet the benchmark.
-</p>    <p>
-
-  Other demographics (like Black and Hispanic percentages) show smaller or unclear effects.
-  Asian student percentage has a small positive effect—colleges with more Asian
-  students slightly outperform others on this measure.
+  Tribal Colleges stand out as being far less likely to meet Threshold 0 than other institutions. This holds true across both the reduced model and model with Pell Grant percentage. The difference is large and meaningful, suggesting that these colleges may be facing major challenges.
 </p>
-
-<h3 id="threshold1">Postsecondary Value Commission: Threshold 1</h3>
+<p>
+  Other types of MSIs (such as HBCUs, HSIs, PBIs, etc.) don’t show strong differences from the baseline; their chances of meeting the benchmark are about the same as non-MSI institutions.
+</p>
+<p>
+  These findings point to possible systemic barriers or underfunding facing Tribal Colleges specifically.
+</p>
+<p>
+  Next, we replace the MSI flags with continuous demographic shares—% Asian, % Black, % Hispanic, etc.—to see how each group’s concentration relates to earnings once Pell % is controlled.
+</p>
+<figure>
+  <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/threshold0_dem.png" alt="Logit Regression plot by Demographic">
+  <figcaption style="text-align:center;">
+    <em>Figure 4: Logit Coefficients for Threshold 0 by Demographics</em>
+  </figcaption>
+</figure>
+<p>
+  Colleges with higher percentages of Native Hawaiian or Pacific Islander (NHPI) and American Indian/Alaska Native (AIAN) students are less likely to meet the benchmark. These are significant negative effects, meaning they are not likely to be due to chance.
+</p>
+<p>
+  Schools with more low-income students (Pell Grant recipients) are actually more likely to meet the benchmark.
+</p>
+<p>
+  Other demographics (like Black and Hispanic percentages) show smaller or unclear effects. Asian student percentage has a small positive effect—colleges with more Asian students slightly outperform others on this measure.
+</p>
+<h4 id="threshold1">
+  Postsecondary Value Commission: Threshold 1
+</h4>
 <section id="threshold-framework">
-  <h4>Calculation Framework</h4>
+  <h4>
+    Calculation Framework
+  </h4>
   <p>
-    <strong>IHEP Earnings Premium:</strong>
-    “A student meets this threshold if they reach at least median earnings in their field of
-    study (or, if field of study data is unavailable, the median earnings for the institution’s
-    predominant degree type).”
-    <a
-      href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p.
-      40)</a>
+    <strong>IHEP Earnings Premium:</strong> “A student meets this threshold if they reach at least median earnings in their field of study (or, if field of study data is unavailable, the median earnings for the institution’s predominant degree type).” <a href="https://live-postsecondary-value-commission.pantheonsite.io/wp-content/uploads/2021/07/PVC-Final-Report-FINAL-7.2.pdf ">(p. 40)</a>
   </p>
-  <h4>Our Implementation:</h4>
+  <h3>
+    Our Implementation:
+  </h3>
   <ul>
     <li>
-      <strong>Earnings Premium:</strong><br/>
-      Median post‑enrollment earnings at institution (10 years after entry)
+      <strong>Earnings Premium:</strong><br>
+      Median post‑enrollment earnings at institution (10&nbsp;years after entry)
     </li>
     <li>
-      <strong>Meeting Threshold 1 (binary):</strong><br/>
-      Earnings premium ≥ in‑state median earnings for people with bachelor’s degree
+      <strong>Meeting Threshold&nbsp;1 (binary):</strong><br>
+      Earnings premium&nbsp;≥&nbsp;in‑state median earnings for people with bachelor’s degree
     </li>
   </ul>
   <p>
-    For 10-year post-enrollment earnings, we relied on the MD_EARN_WNE_P10 variable from College Scorecard.
-    The median earnings for bachelor's degree holders by state were calculated using American Community Survey
-    (ACS) data. We downloaded microdata from the ACS using IPUMS. We used the most recent 5-year pooled ACS data
-    and selected the following variables for download: US2023C_SCHL (highest level of schooling completed),
-    US2023C_PINCP (total personal income), and US2023C_STATE (FIPS state code). Income was then averaged across
-    states.
+    For 10-year post-enrollment earnings, we relied on the MD_EARN_WNE_P10 variable from College Scorecard. The median earnings for bachelor's degree holders by state were calculated using American Community Survey (ACS) data. We downloaded microdata from the ACS using IPUMS. We used the most recent 5-year pooled ACS data and selected the following variables for download: US2023C_SCHL (highest level of schooling completed), US2023C_PINCP (total personal income), and US2023C_STATE (FIPS state code). Income was then averaged across states.
   </p>
-
-  <h3>Table of Results</h3>
-  <div id="table-threshold1"></div>
-
-  <h4>Extensions</h4>
+  <h4>
+    Table of Results
+  </h4>
+  <div id="table-threshold1">
+    &nbsp;
+  </div>
+  <h4>
+    Extensions
+  </h4>
   <p>
-    Future research could modify the current Meeting Threshold 1 variable to compare the earnings of individuals
-    who attend a 2-year college with the median earnings for associate’s degree holders in the school’s state,
-    since, under the current calculation, 2-year schools are being unfairly disadvantaged.
+    Future research could modify the current Meeting Threshold 1 variable to compare the earnings of individuals who attend a 2-year college with the median earnings for associate’s degree holders in the school’s state, since, under the current calculation, 2-year schools are being unfairly disadvantaged.
   </p>
   <p>
-    <strong>The revised calculation for Meeting Threshold 1 would thus be: </strong>
+    <strong>The revised calculation for Meeting Threshold 1 would thus be:&nbsp;</strong>
+  </p>
   <ul>
-    <li>Earnings ≥ β⁢ × (state bachelor’s earnings) + (1 - β)⁢ × (state bachelor’s earnings)</li>
-    <i>where β is a binary indicator for whether the school is a 4-year school.</i>
+    <li>
+      Earnings ≥ β⁢ × (state bachelor’s earnings) + (1 - β)⁢ × (state bachelor’s earnings)
+    </li>
   </ul>
-  An alternative extension would be to more closely follow the original definition of the framework and incorporate
-  field‑of‑study data. However, due to high missingness (approximately 78% across relevant variables), we opted to only
-  use institution-level data. Using field-of-study-level information on a non-random, large subset of the data
-  undermines the interpretability of the measure and biases the results in ways that are difficult to identify and
-  account for.
+  <p>
+    <em>where β is a binary indicator for whether the school is a 4-year school.</em>An alternative extension would be to more closely follow the original definition of the framework and incorporate field‑of‑study data. However, due to high missingness (approximately 78% across relevant variables), we opted to only use institution-level data. Using field-of-study-level information on a non-random, large subset of the data undermines the interpretability of the measure and biases the results in ways that are difficult to identify and account for.
+  </p>
+  <p>
+    &nbsp;
   </p>
 </section>
-
 <section id="threshold1-regression">
-  <h3>Further Analysis of Threshold 1</h3>
-  <h4>Regression Models</h4>
+  <h2>
+    Further Analysis of Threshold 1
+  </h2>
+  <h3>
+    Regression Models
+  </h3>
   <p>
-    Next, we estimate how controlling for the share of Pell Grant recipients shifts the relative
-    earnings premium across different Minority‑Serving Institution (MSI) types.
+    Next, we estimate how controlling for the share of Pell Grant recipients shifts the relative earnings premium across different Minority‑Serving Institution (MSI) types.
   </p>
   <figure>
-    <img
-      alt="Regression plot of earnings premium by MSI type"
-      src="Regression Plot_ Earnings Premium MSI.png"
-      style="display:block; margin:auto; width:50%;"/>
-    <figcaption style="text-align: center;">Figure 5: OLS Effects for Earnings Premium by MSI Type</figcaption>
-  </figure>
-
-  <ul>
-    <li>
-      <strong>HBCUs:</strong> Move from underperforming to outperforming non‑MSI schools
-      (≈ +$7,000) once Pell % is included.
-    </li>
-    <li><strong>PBI:</strong> Also see a noticeable improvement.</li>
-    <li><strong>HSI &amp; TCU:</strong> Remain largely unchanged.</li>
-    <li><strong>ANNHI, NANTI, AANAPII:</strong> Experience a modest decrease (≈ $2,000).</li>
-  </ul>
-  <p>
-    Overall, <strong>the impact of controlling for Pell % is heterogeneous.</strong> Because MSI classification is based
-    on
-    whether each subgroup exceeds a fixed threshold (typically ≥ 25 %), using continuous
-    demographic percentages could yield more nuanced insights than a simple binary flag.
-  </p>
-</section>
-
-<section id="threshold1-demographics">
-  <h5>Regression Model with Demographics</h5>
-  <p>
-    We replace the MSI flags with continuous demographic shares—% Asian, % Black,
-    % Hispanic, etc.—to see how each group’s concentration relates to earnings once Pell %
-    is controlled.
-  </p>
-  <figure>
-    <img
-      alt="Regression plot of earnings premium with demographic features"
-      src="Regression Plot_ Earnings Premium Demographic.png"
-      style="display:block; margin:auto; width:50%;"/>
-    <figcaption style="text-align: center;">Figure 6: OLS Effects for Earnings Premium by Demographic Features
+    <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/Regression Plot_ Earnings Premium MSI.png" alt="Regression plot of earnings premium by MSI type">
+    <figcaption style="text-align:center;">
+      Figure 5: OLS Effects for Earnings Premium by MSI Type
     </figcaption>
   </figure>
-
+  <ul>
+    <li>
+      <strong>HBCUs:</strong> Move from underperforming to outperforming non‑MSI schools (≈ +$7,000) once Pell % is included.
+    </li>
+    <li>
+      <strong>PBI:</strong> Also see a noticeable improvement.
+    </li>
+    <li>
+      <strong>HSI &amp; TCU:</strong> Remain largely unchanged.
+    </li>
+    <li>
+      <strong>ANNHI, NANTI, AANAPII:</strong> Experience a modest decrease (≈ $2,000).
+    </li>
+  </ul>
   <p>
-    Despite the smaller x-axis in this new figure, the effects of demographic percentages are still quite
-    substantial. For example, a 1% increase in Pell students is associated with a $320 decrease in
-    expected earnings. Assuming an approximately linear relationship (as tests of curvilinear models
-    suggest the linear model provides a reasonably good fit), a school with 30% more students with Pell
-    Grants is associated with students earning nearly $10,000 less on average ten years after enrollment.
+    Overall, <strong>the impact of controlling for Pell % is heterogeneous.</strong> Because MSI classification is based on whether each subgroup exceeds a fixed threshold (typically ≥ 25 %), using continuous demographic percentages could yield more nuanced insights than a simple binary flag.
+  </p>
+</section>
+<section id="threshold1-demographics">
+  <h3>
+    Regression Model with Demographics
+  </h3>
+  <p>
+    We replace the MSI flags with continuous demographic shares—% Asian, % Black, % Hispanic, etc.—to see how each group’s concentration relates to earnings once Pell&nbsp;% is controlled.
+  </p>
+  <figure>
+    <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/Regression Plot_ Earnings Premium Demographic.png" alt="Regression plot of earnings premium with demographic features">
+    <figcaption style="text-align:center;">
+      Figure 6: OLS Effects for Earnings Premium by Demographic Features
+    </figcaption>
+  </figure>
+  <p>
+    Despite the smaller x-axis in this new figure, the effects of demographic percentages are still quite substantial. For example, a 1% increase in Pell students is associated with a $320 decrease in expected earnings. Assuming an approximately linear relationship (as tests of curvilinear models suggest the linear model provides a reasonably good fit), a school with 30% more students with Pell Grants is associated with students earning nearly $10,000 less on average ten years after enrollment.
   </p>
   <p>
-    Aside from Asian students, controlling for Pell % amplifies the positive association
-    between each demographic share and earnings relative to the White student baseline. These
-    findings provide strong evidence that this ROI measure disadvantages schools with higher
-    minority populations by confounding return on investment with the effects of
-    prior socioeconomic status.
+    Aside from Asian students, controlling for Pell % amplifies the positive association between each demographic share and earnings relative to the White student baseline. These findings provide strong evidence that this ROI measure disadvantages schools with higher minority populations by confounding return on investment with the effects of prior socioeconomic status.
   </p>
 </section>
 <section id="threshold1-demographics-logit">
-  <h5>Logit Regression Model with Demographics</h5>
+  <h3>
+    Logit Regression Model with Demographics
+  </h3>
   <p>
-    We then modeled the log-odds of meeting threshold 1 as a function of demographic features using logit regression.
-    See the Postsecondary Value Commission section for a review of how to interpret the coefficients.
+    We then modeled the log-odds of meeting threshold 1 as a function of demographic features using logit regression. See the Postsecondary Value Commission section for a review of how to interpret the coefficients.
   </p>
   <figure>
-    <img
-      alt="Logit regression plot of threshold 1 with demographic features"
-      src="Threshold1_logit_demographics.png"
-      style="display:block; margin:auto; width:50%;"/>
-    <figcaption style="text-align: center;"><i>Figure 7: Logit Effects for Threshold 1 by Demographic Features</i>
+    <img style="display:block;margin:auto;" src="/sites/default/files/2025-06/Threshold1_logit_demographics.png" alt="Logit regression plot of threshold 1 with demographic features">
+    <figcaption style="text-align:center;">
+      <em>Figure 7: Logit Effects for Threshold 1 by Demographic Features</em>
     </figcaption>
   </figure>
   <p>
-    Overall, the effect of Black and NHPI percentage marginally improved after controlling for Pell percentage, the
-    other effect of Asian percentage slightly decreased, and the effects of the variables stayed about constant.
+    Overall, the effect of Black and NHPI percentage marginally improved after controlling for Pell percentage, the other effect of Asian percentage slightly decreased, and the effects of the variables stayed about constant.
   </p>
   <p>
-    Because the OLS model uses the full continuous ROI measure rather than a binary threshold, it retains more
-    information and
-    offers more interpretable estimates of the relationship between demographic composition and ROI. We therefore find
-    its results to be most informative and useful.
+    Because the OLS model uses the full continuous ROI measure rather than a binary threshold, it retains more information and offers more interpretable estimates of the relationship between demographic composition and ROI. We therefore find its results to be most informative and useful.
   </p>
 </section>
+<h2 id="conclusions">
+  Final Conclusions
+</h2>
+<p>
+  Persistent racial disparities suggest that structural inequities continue to shape the economic value of higher education for students of color. Our analysis reveals critical disparities in postsecondary outcomes across different institutional types and student demographics. Tribal Colleges consistently underperform on key earnings benchmarks, even after accounting for socioeconomic factors, suggesting deep-rooted structural barriers that warrant targeted policy attention. While other Minority-Serving Institutions (MSIs) such as HBCUs and PBIs show improved performance when controlling for Pell Grant rates, this improvement is not uniform across all MSI types.
+</p>
+<p>
+  We examined the effects of both racial/ethnic demographic and MSI status on an institution’s ROI, using existing ROI calculation metrics. We found that regression models using continuous demographic data instead of binary MSI flags can provide a more nuanced understanding of how student composition relates to return on investment. Notably, institutions with higher shares of low-income and high proportions of certain minority student demographics tend to show lower post-enrollment earnings, even when educational inputs are similar. These findings underscore the importance of adjusting ROI metrics for socioeconomic and demographic factors to avoid unfairly penalizing institutions serving historically marginalized populations. Unfortunately, implementing such adjustments and determining an institution’s true ROI is a non-trivial causal problem that is difficult to contend with without rich student-level data and advanced modeling techniques. Due to the complexity of this problem, we do not propose any revised versions of the frameworks in this report. Our primary purpose has been to identify the ways in which existing ROI frameworks disadvantage certain marginalized groups. Nonetheless, as the Postsecondary Value Commission’s framework evolves, incorporating more granular data by field of study, degree type, and student background will be essential to ensuring a more equitable and accurate assessment of institutional value.
+</p>
+<h2>
+  Discussion
+</h2>
+<p>
+  We want to acknowledge the inherent limitations of research that assesses the value of institutions through a purely economic lens. This approach disregards the soft value provided by institutions of higher education, especially MSIs, which foster cultural preservation, the cultivation of identity, and the development of students’ social capital. Working with thresholds presents a unique problem of creating a binary, which can be an oversimplification of the true effect that they provide. Another limitation of our work was the availability of data: individual programs within institutions are often small enough that data must be privacy-suppressed. There is also a marked lack of data relating to external factors that affect performance on ROI frameworks, such as labor market conditions at the county level.
+</p>
+<p>
+  Despite these limitations, we believe that addressing these challenges presents an exciting opportunity for future research and development, and we are excited for the potential of enhancing existing ROI frameworks to better capture the true impact of higher education. Our research explores areas where future ROI models can adapt to better account for the effects of socioeconomic background and racial/ethnic composition on institutional ROI. Our findings show that controlling for socioeconomic factors significantly shifts institutional ROI outcomes, often narrowing or reversing apparent gaps between MSIs and non-MSIs. We also advocate for ROI measures to incorporate continuous demographic variables over binary institutional classifications, which better reflect the nuanced differences between institutions, both MSIs and non-MSIs.
+</p>
 
-<h3 id="conclusions">Final Conclusions</h3>
-<p>
-  Persistent racial disparities suggest that structural inequities continue to shape the economic value of higher
-  education for students of color. Our analysis reveals critical disparities in postsecondary outcomes across different
-  institutional types and student demographics. Tribal Colleges consistently underperform on key earnings benchmarks,
-  even after accounting for socioeconomic factors, suggesting deep-rooted structural barriers that warrant targeted
-  policy attention. While other Minority-Serving Institutions (MSIs) such as HBCUs and PBIs show improved performance
-  when controlling for Pell Grant rates, this improvement is not uniform across all MSI types.
-</p>    <p>
-  We examined the effects of both racial/ethnic demographic and MSI status on an institution’s ROI, using existing ROI
-  calculation metrics. We found that regression models using continuous demographic data instead of binary MSI flags can
-  provide a more nuanced understanding of how student composition relates to return on investment. Notably, institutions
-  with higher shares of low-income and high proportions of certain minority student demographics tend to show lower
-  post-enrollment earnings, even when educational inputs are similar. These findings underscore the importance of
-  adjusting ROI metrics for socioeconomic and demographic factors to avoid unfairly penalizing institutions serving
-  historically marginalized populations. Unfortunately, implementing such adjustments and determining an institution’s
-  true ROI is a non-trivial causal problem that is difficult to contend with without rich student-level data and
-  advanced modeling techniques. Due to the complexity of this problem, we do not propose any revised versions of the
-  frameworks in this report. Our primary purpose has been to identify the ways in which existing ROI frameworks
-  disadvantage certain marginalized groups. Nonetheless, as the Postsecondary Value Commission’s framework evolves,
-  incorporating more granular data by field of study, degree type, and student background will be essential to ensuring
-  a more equitable and accurate assessment of institutional value.
-</p>
-<h2>Discussion</h2>
-<p>
-  We want to acknowledge the inherent limitations of research that assesses the value of institutions through a purely
-  economic lens. This approach disregards the soft value provided by institutions of higher education, especially MSIs,
-  which foster cultural preservation, the cultivation of identity, and the development of students’ social capital.
-  Working with thresholds presents a unique problem of creating a binary, which can be an oversimplification of the true
-  effect that they provide. Another limitation of our work was the availability of data: individual programs within
-  institutions are often small enough that data must be privacy-suppressed. There is also a marked lack of data relating
-  to external factors that affect performance on ROI frameworks, such as labor market conditions at the county level.
-</p>
-<p>
-  Despite these limitations, we believe that addressing these challenges presents an exciting opportunity for future
-  research and development, and we are excited for the potential of enhancing existing ROI frameworks to better capture
-  the true impact of higher education. Our research explores areas where future ROI models can adapt to better account
-  for the effects of socioeconomic background and racial/ethnic composition on institutional ROI. Our findings show that
-  controlling for socioeconomic factors significantly shifts institutional ROI outcomes, often narrowing or reversing
-  apparent gaps between MSIs and non-MSIs. We also advocate for ROI measures to incorporate continuous demographic
-  variables over binary institutional classifications, which better reflect the nuanced differences between
-  institutions, both MSIs and non-MSIs.
-</p>
 </div>
 
+  <p>
   <script>
     // Load main CSV: all_roi_metrics.csv
-    Papa.parse("all_roi_metrics.csv", {
+    Papa.parse('/sites/default/files/2025-06/all_roi_metrics.csv', {
       download: true,
       header: true,
-      complete: function(results) {
+      complete: function (results) {
         const headers = results.meta.fields;
         const rows = results.data.map(row => headers.map(h => row[h]));
-
+        document.getElementById('table_1').innerHTML = '';
         new gridjs.Grid({
           columns: headers,
           data: rows,
@@ -612,19 +513,18 @@
           pagination: { limit: 10 },
           sort: true,
           fixedHeader: true,
-          height: '500px'
-        }).render(document.getElementById("table_1"));
-      }
+          height: '500px',
+        }).render(document.getElementById('table_1'));
+      },
     });
-
     //load csv: pep_roi_data.csv
-    Papa.parse("pep_roi_data.csv", {
+    Papa.parse('/sites/default/files/2025-06/pep_roi_data.csv', {
       download: true,
       header: true,
-      complete: function(results) {
+      complete: function (results) {
         const headers = results.meta.fields;
         const rows = results.data.map(row => headers.map(h => row[h]));
-
+        document.getElementById('pep_table').innerHTML = '';
         new gridjs.Grid({
           columns: headers,
           data: rows,
@@ -632,37 +532,72 @@
           pagination: { limit: 10 },
           sort: true,
           fixedHeader: true,
-          height: '500px'
-        }).render(document.getElementById("pep_table"));
-      }
+          height: '500px',
+        }).render(document.getElementById('pep_table'));
+      },
     });
-
-
-    // Load threshold0.csv
-    Papa.parse("threshold0.csv", {
+    // // Load threshold0.csv
+    // Papa.parse("/sites/default/files/2025-06/threshold0.csv", {
+    //   download: true,
+    //   header: true,
+    //   complete: function(results) {
+    //     const headers = results.meta.fields;
+    //     const rows = results.data.map(row => headers.map(h => row[h]));
+    //
+    //     const columns = headers.map(h => {
+    //       if (h === "Meets Threshold 0?") {
+    //         return {
+    //           name: h,
+    //           formatter: (cell) => {
+    //             const value = String(cell).trim().toLowerCase();
+    //             const isTrue = (value === "true");
+    //             const color = isTrue ? "green" : "red";
+    //             const displayText = isTrue ? "True" : "False";
+    //             return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
+    //           }
+    //         };
+    //       } else {
+    //         return h;
+    //       }
+    //     });
+    //
+    //     document.getElementById("table-threshold0").innerHTML = "";
+    //
+    //     new gridjs.Grid({
+    //       columns: columns,
+    //       data: rows,
+    //       search: true,
+    //       pagination: { limit: 10 },
+    //       sort: true,
+    //       fixedHeader: true,
+    //       height: '500px'
+    //     }).render(document.getElementById("table-threshold0"));
+    //   }
+    // });
+    // Load threshold1.csv
+    Papa.parse('/sites/default/files/2025-06/threshold1.csv', {
       download: true,
       header: true,
-      complete: function(results) {
+      complete: function (results) {
         const headers = results.meta.fields;
         const rows = results.data.map(row => headers.map(h => row[h]));
-
         const columns = headers.map(h => {
-          if (h === "Meets Threshold 0?") {
+          if (h === 'Meets Threshold 1') {
             return {
               name: h,
               formatter: (cell) => {
                 const value = String(cell).trim().toLowerCase();
-                const isTrue = (value === "true");
-                const color = isTrue ? "green" : "red";
-                const displayText = isTrue ? "True" : "False";
+                const isTrue = (value === 'true');
+                const color = isTrue ? 'green' : 'red';
+                const displayText = isTrue ? 'True' : 'False';
                 return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
-              }
+              },
             };
           } else {
             return h;
           }
         });
-
+        document.getElementById('table-threshold1').innerHTML = '';
         new gridjs.Grid({
           columns: columns,
           data: rows,
@@ -670,86 +605,46 @@
           pagination: { limit: 10 },
           sort: true,
           fixedHeader: true,
-          height: '500px'
-        }).render(document.getElementById("table-threshold0"));
-      }
+          height: '500px',
+        }).render(document.getElementById('table-threshold1'));
+      },
     });
-
-    // Load threshold1.csv
-    Papa.parse("threshold1.csv", {
-    download: true,
-    header: true,
-    complete: function(results) {
-      const headers = results.meta.fields;
-      const rows = results.data.map(row => headers.map(h => row[h]));
-
-      const columns = headers.map(h => {
-        if (h === "Meets Threshold 1") { 
-          return {
-            name: h,
-            formatter: (cell) => {
-              const value = String(cell).trim().toLowerCase();
-              const isTrue = (value === "true");
-              const color = isTrue ? "green" : "red";
-              const displayText = isTrue ? "True" : "False";
-              return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
-            }
-          };
-        } else {
-          return h;
-        }
-      });
-
-        new gridjs.Grid({
-          columns: columns,
-          data: rows,
-          search: true,
-          pagination: { limit: 10 },
-          sort: true,
-          fixedHeader: true,
-          height: '500px'
-        }).render(document.getElementById("table-threshold1"));
-      }
-    });
-
-
     // Load threshold2.csv
-    Papa.parse("threshold2.csv", {
+    Papa.parse('/sites/default/files/2025-06/threshold2.csv', {
       download: true,
       header: true,
-      complete: function(results) {
+      complete: function (results) {
         const headers = results.meta.fields;
         const rows = results.data.map(row => headers.map(h => row[h]));
         const columns = headers.map(h => {
-          if (h === "low_income_reaches_high") {
+          if (h === 'low_income_reaches_high') {
             return {
               name: h,
               formatter: (cell) => {
                 const value = String(cell).trim().toLowerCase();
-                const isTrue = (value === "true");
-                const color = isTrue ? "green" : "red";
-                const displayText = isTrue ? "True" : "False";
+                const isTrue = (value === 'true');
+                const color = isTrue ? 'green' : 'red';
+                const displayText = isTrue ? 'True' : 'False';
                 return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
-              }
+              },
             };
           }
-          if (h === "female_reaches_male") {
+          if (h === 'female_reaches_male') {
             return {
               name: h,
               formatter: (cell) => {
                 const value = String(cell).trim().toLowerCase();
-                const isTrue = (value === "true");
-                const color = isTrue ? "green" : "red";
-                const displayText = isTrue ? "True" : "False";
+                const isTrue = (value === 'true');
+                const color = isTrue ? 'green' : 'red';
+                const displayText = isTrue ? 'True' : 'False';
                 return gridjs.html(`<span style="color: white; background-color: ${color}; padding: 2px 6px; border-radius: 4px;">${displayText}</span>`);
-              }
+              },
             };
-          }
-          else {
+          } else {
             return h;
           }
         });
-
+        document.getElementById('table-threshold0').innerHTML = '';
         new gridjs.Grid({
           columns: columns,
           data: rows,
@@ -757,11 +652,83 @@
           pagination: { limit: 10 },
           sort: true,
           fixedHeader: true,
-          height: '500px'
-        }).render(document.getElementById("table-threshold0"));
-      }
+          height: '500px',
+        }).render(document.getElementById('table-threshold0'));
+      },
     });
+    window.MathJax = {
+      jax: ["input/TeX", "output/CommonHTML"],
+      extensions: ["tex2jax.js"],
+      TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js"]
+      },
+      /* The MathJax API provides us with the ability to register
+      callbacks on signals broadcast during its startup sequence.
+      Documentation:
+      http://docs.mathjax.org/en/latest/advanced/signals.html
+      https://docs.mathjax.org/en/v1.1-latest/startup.html */
+      AuthorInit: function() {
+        MathJax.Hub.Register.StartupHook("End Typeset", function() {
+          const fullFontSize = 121;
+          var renderMath = function() {
+            /* All formulae that we want to enable responsive scaling
+            for need to be wrapped with `class="mj-formula"` */
+            var mjFormulae = document.getElementsByClassName("mj-formula");
+            if (mjFormulae) {
+              for (var i = 0; i < mjFormulae.length; ++i) {
+                var mjFormula = mjFormulae[i];
+
+                /* Retrieve the MathJax element `MathJax_CHTML`. If this element
+                has a descendant `mjx-table`, the element is a multi-line equation
+                with automatic numbering and its scaling factor has to be calculated
+                differently. Note: if your output processor is not `CommonHTML`, I
+                suspect these class names may be different */
+                var mjElement = mjFormula.getElementsByClassName("MathJax_CHTML")[0];
+                var mjTable = mjElement.getElementsByClassName("mjx-table")[0];
+
+                /* If the equation is single-line, the scaling factor is a function
+                of `MathJax_CHTML`'s offset width. If it's multi-line, it is a
+                function of its descendant `mjx-table` */
+                var scale = 0.7 * (mjTable ?
+                  mjFormula.offsetWidth / mjTable.offsetWidth :
+                  mjFormula.offsetWidth / mjElement.offsetWidth);
+
+                /* Apply the scaling factor to the old font size, rounded to the
+                nearest integer, as long as it does not exceed the max font size */
+                const oldFontSize = parseInt(mjElement.style.fontSize);
+                var newFontSize = Math.round(Math.min(oldFontSize * scale, fullFontSize));
+                mjElement.style.fontSize = `${newFontSize}%`;
+              }
+            }
+          }
+
+          /* `renderMath` needs to be called once on the `End Typeset`
+          signal broadcast so the scaling is applied on first load */
+          renderMath();
+
+          /* Attach an event handler that calls `renderMath` after a small delay */
+          var timeoutId;
+          const delay = 250;
+          window.addEventListener("resize", function() {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(renderMath, delay);
+          });
+        });
+      }
+    };
   </script>
+</p>
+
+<style>
+  img {
+    display:block;
+    margin:auto;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+</style>
 
 </body>
 </html>
